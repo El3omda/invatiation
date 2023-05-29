@@ -128,8 +128,10 @@
 @section('content')
     <div class="container">
 
+        {{ date('d-m-Y  h:i:s A') }}
+
         {{-- Show Options If client Own This Invitation --}}
-        @if ($invite->ip == $_SERVER['REMOTE_ADDR'])
+        @if ($invite->ip == $_SERVER['HTTP_X_FORWARDED_FOR'])
             <div class="d-flex justify-content-between my-5 dispr">
                 <div>
                     <a href="{{ route('invEdit', [App::getLocale(), $invite->id]) }}" class="btn btn-primary">
