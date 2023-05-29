@@ -132,8 +132,8 @@
     <div class="container">
 
         @php
-            echo unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']))['geoplugin_timezone'];
-            // date_default_timezone_set();
+            $tz = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']))['geoplugin_timezone'];
+            date_default_timezone_set($tz);
             echo date_default_timezone_get();
         @endphp
 
