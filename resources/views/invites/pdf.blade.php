@@ -14,11 +14,10 @@
 
 <body>
 
-    <img width="100px" src="https://i.ibb.co/brVwZwg/logo.jpg" alt="Logo" />
     <br><br><br><br>
     <center>
         <img style="border-radius: 50%;padding: 5px;border: 1px solid rgba(250,44,99,1);" width="200px" height="200px"
-            src="https://i.ibb.co/V38wjkR/man.jpg" alt="Logo" />
+            src="{{ !empty($invite->photo) ? 'https://inv.almiqias.com/' . $invite->photo : 'https://inv.almiqias.com/assets/images/default.jpg' }}" alt="Logo" />
         <br>
 
         {{-- Name Of Invitation Owner --}}
@@ -48,7 +47,7 @@
 
             <br>
 
-            {{ $dateT }} {{ $invite->date }} {{ $str3 }} 
+            {{ $dateT }} {{ $invite->date }} {{ $str3 }}
         </h2>
 
         <br>
