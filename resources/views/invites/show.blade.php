@@ -103,6 +103,9 @@
 
 @php
 
+    $tz = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']))['geoplugin_timezone'];
+    date_default_timezone_set($tz);
+
     function HijriToJD($m, $d, $y)
     {
         return (int) ((11 * $y + 3) / 30) + 354 * $y + 30 * $m - (int) (($m - 1) / 2) + $d + 1948440 - 385;
@@ -130,16 +133,6 @@
 
 @section('content')
     <div class="container">
-
-        @php
-            $tz = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']))['geoplugin_timezone'];
-            date_default_timezone_set($tz);
-            echo date_default_timezone_get();
-        @endphp
-
-        <br>
-
-        {{ date('h:i:s A') }}
 
         {{-- Show Options If client Own This Invitation --}}
         @if ($invite->ip == $_SERVER['REMOTE_ADDR'])
