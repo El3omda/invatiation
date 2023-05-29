@@ -10,7 +10,7 @@
         <div style="width: 90%;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);text-align: center;">
             <img width="200px" src="{{ asset('assets/images/logo.png') }}" alt="logo">
             <h3 class="fw-bold mt-3">
-                {{ __('home.h1') }}
+                {{ __('home.h111') }}
             </h3>
         </div>
 

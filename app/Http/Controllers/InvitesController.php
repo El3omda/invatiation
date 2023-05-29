@@ -34,10 +34,6 @@ class InvitesController extends Controller
     public function store(Request $request)
     {
 
-        $inputs = $request->validate([
-            'g-recaptcha-response' => 'required|captcha'
-        ]);
-
         $inputs = [
             'owner' => $request->owner,
             'event' => $request->event,
@@ -89,7 +85,7 @@ class InvitesController extends Controller
 
         // Save To DB
         if (Invite::create($inputs)) {
-            return redirect('/' . App::getLocale() . '/inv/' . $inputs['link']);
+            return redirect('/' . App::getLocale() . '/' . $inputs['link']);
         }
     }
 
@@ -146,21 +142,12 @@ class InvitesController extends Controller
         }
 
         // Date Type ( Hijri - Miladi )
-        if (!empty($request->dateMiladi)) {
-            $inputs['dateType'] = 'Miladi';
-        }
-
-        if (!empty($request->dateHijri)) {
-            $inputs['dateType'] = 'Hijri';
-        }
-
-        // Date
-        if (!empty($request->dateMiladi)) {
-            $inputs['date'] = $request->dateMiladi;
-        }
-
-        if (!empty($request->dateHijri)) {
+        if ($request->dateT == 'Hijri') {
             $inputs['date'] = $request->dateHijri;
+            $inputs['dateType'] = 'Hijri';
+        } else {
+            $inputs['date'] = $request->dateMiladi;
+            $inputs['dateType'] = 'Miladi';
         }
 
         $link->owner = $inputs['owner'];
@@ -178,7 +165,7 @@ class InvitesController extends Controller
         }
 
         if ($link->save()) {
-            return redirect('/' . App::getLocale() . '/inv/' . $link->link);
+            return redirect('/' . App::getLocale() . '/' . $link->link);
         }
     }
 
@@ -230,7 +217,7 @@ class InvitesController extends Controller
 
         $owner = $Arabic->utf8Glyphs($link->owner);
         $description = $Arabic->utf8Glyphs($link->description);
-        $str1 = $Arabic->utf8Glyphs('علي أن يكون');
+        $str1 = $Arabic->utf8Glyphs('المناسبة : ');
         $event = $Arabic->utf8Glyphs($link->event);
         $str2 = $Arabic->utf8Glyphs('يوم');
 

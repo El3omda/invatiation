@@ -92,10 +92,10 @@
                 </div>
 
                 {{-- recaptcha --}}
-                <div class="col-12 my-3">
+                {{-- <div class="col-12 my-3">
                     {!! NoCaptcha::renderJs() !!}
                     {!! NoCaptcha::display() !!}
-                </div>
+                </div> --}}
             </div>
 
             <button type="submit" class="fw-bold btn btn-primary w-100 mb-3">{{ __('invite.n12') }}</button>

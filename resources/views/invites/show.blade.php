@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title')
-    {{ __('invite.s16') }} {{ $invite->owner }} {{ __('invite.s17') }} {{ $invite->event }}
+    {{ $invite->event }}
 @endsection
 
 @section('css')
@@ -10,10 +10,9 @@
     <meta name="description" content="نقدم لك خدمة انشاء دعوات لمناسباتك مع امكانية مشاركة رابط الدعوة مع من تحب">
 
     <!-- Facebook Meta Tags -->
-    <meta property="og:url" content="https://inv.almiqias.com/ar/inv/{{ $invite->link }}">
+    <meta property="og:url" content="https://inv.almiqias.com/ar/{{ $invite->link }}">
     <meta property="og:type" content="website">
-    <meta property="og:title"
-        content="{{ __('invite.s16') }} {{ $invite->owner }} {{ __('invite.s17') }} {{ $invite->event }}">
+    <meta property="og:title" content="{{ $invite->event }}">
     <meta property="og:description" content="{{ $invite->description }}">
     <meta property="og:image"
         content="{{ !empty($invite->photo) ? 'https://inv.almiqias.com/' . $invite->photo : 'https://inv.almiqias.com/assets/images/default.jpg' }}">
@@ -21,9 +20,8 @@
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta property="twitter:domain" content="inv.almiqias.com">
-    <meta property="twitter:url" content="https://inv.almiqias.com/ar/inv/{{ $invite->link }}">
-    <meta name="twitter:title"
-        content="{{ __('invite.s16') }} {{ $invite->owner }} {{ __('invite.s17') }} {{ $invite->event }}">
+    <meta property="twitter:url" content="https://inv.almiqias.com/ar/{{ $invite->link }}">
+    <meta name="twitter:title" content="{{ $invite->event }}">
     <meta name="twitter:description" content="{{ $invite->description }}">
     <meta name="twitter:image"
         content="{{ !empty($invite->photo) ? 'https://inv.almiqias.com/' . $invite->photo : 'https://inv.almiqias.com/assets/images/default.jpg' }}">
@@ -114,19 +112,21 @@
     // Count Down Time Stamp
 
     #Check Date Type
-    if ($invite->dateType == 'Miladi') {
-        $d = DateTime::createFromFormat('Y-m-d H:i', $invite->date . ' ' . $invite->time);
-        $timeS = $d->getTimestamp();
-    } else {
-        $exploadeDate = explode('-', $invite->date);
+    if (!empty($invite->date)) {
+        if ($invite->dateType == 'Miladi') {
+            $d = DateTime::createFromFormat('Y-m-d H:i', $invite->date . ' ' . $invite->time);
+            $timeS = $d->getTimestamp();
+        } else {
+            $exploadeDate = explode('-', $invite->date);
 
-        $date = HijriToJD($exploadeDate[1], $exploadeDate[2], $exploadeDate[0]);
+            $date = HijriToJD($exploadeDate[1], $exploadeDate[2], $exploadeDate[0]);
 
-        $originalDate = jdtogregorian($date);
-        $newDate = date('Y-m-d', strtotime($originalDate));
+            $originalDate = jdtogregorian($date);
+            $newDate = date('Y-m-d', strtotime($originalDate));
 
-        $d = DateTime::createFromFormat('Y-m-d H:i', $newDate . ' ' . $invite->time);
-        $timeS = $d->getTimestamp();
+            $d = DateTime::createFromFormat('Y-m-d H:i', $newDate . ' ' . $invite->time);
+            $timeS = $d->getTimestamp();
+        }
     }
 
 @endphp
@@ -185,9 +185,8 @@
 
             <br>
             {{-- Invitation Date And Time --}}
+            @if (!empty($invite->date))
             <h4 class="fw-bold">
-                علي أن يكون
-                {{ $invite->event }}
                 يوم
                 <span style="color: rgba(250,44,99,1);">
                     @php
@@ -212,42 +211,45 @@
                 الموافق
                 <span style="color: rgba(250,44,99,1);">{{ $invite->date }}</span>
                 {{ $invite->dateType == 'Hijri' ? 'هـ' : 'مـ' }}
+                <br><br>
+                المناسبة : {{ $invite->event }}
             </h4>
+            @endif
         </div>
 
-        <div class="mb-5"></div>
+        @if (!empty($invite->date))
+            {{-- Count Down --}}
+            <div class="example">
+                <h3 class="fw-bold text-center mb-4">{{ __('invite.s15') }}</h3>
 
-        {{-- Count Down --}}
-        <div class="example">
-            <h3 class="fw-bold text-center mb-4">{{ __('invite.s15') }}</h3>
+                <div id="flipdown" class="flipdown"></div>
+            </div>
 
-            <div id="flipdown" class="flipdown"></div>
-        </div>
+            {{-- Count Up --}}
+            <div class="countUp" style="display: none;">
+                <h3 class="fw-bold text-center">{{ __('invite.s1') }}</h3>
 
-        {{-- Count Up --}}
-        <div class="countUp" style="display: none;">
-            <h3 class="fw-bold text-center">{{ __('invite.s1') }}</h3>
+                <ul id="countdown" class="text-dark">
 
-            <ul id="countdown" class="text-dark">
-
-                <li id="days">
-                    <div class="number">00</div>
-                    <div class="label">{{ __('invite.s5') }}</div>
-                </li>
-                <li id="hours">
-                    <div class="number">00</div>
-                    <div class="label">{{ __('invite.s4') }}</div>
-                </li>
-                <li id="minutes">
-                    <div class="number">00</div>
-                    <div class="label">{{ __('invite.s3') }}</div>
-                </li>
-                <li id="seconds">
-                    <div class="number">00</div>
-                    <div class="label">{{ __('invite.s2') }}</div>
-                </li>
-            </ul>
-        </div>
+                    <li id="days">
+                        <div class="number">00</div>
+                        <div class="label">{{ __('invite.s5') }}</div>
+                    </li>
+                    <li id="hours">
+                        <div class="number">00</div>
+                        <div class="label">{{ __('invite.s4') }}</div>
+                    </li>
+                    <li id="minutes">
+                        <div class="number">00</div>
+                        <div class="label">{{ __('invite.s3') }}</div>
+                    </li>
+                    <li id="seconds">
+                        <div class="number">00</div>
+                        <div class="label">{{ __('invite.s2') }}</div>
+                    </li>
+                </ul>
+            </div>
+        @endif
 
         {{-- Share Invite --}}
         <div class="mt-5 text-center w-75 mx-auto dispr" style="direction: rtl">
@@ -318,6 +320,29 @@
         </div>
     </div>
 
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8083085385088514"
+        crossorigin="anonymous"></script>
+    <!-- al -->
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8083085385088514" data-ad-slot="2819449587"
+        data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9VKCZN8NY9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'G-9VKCZN8NY9');
+    </script>
+
+
     <footer class="text-center py-3 text-white fw-bold mt-5"
         style="background: linear-gradient(90deg, rgba(250,44,99,1) 0%, rgba(251,167,15,1) 100%);">
         {{ __('inc.n4') }} {{ date('Y') }}
@@ -338,221 +363,223 @@
         }
     </script>
 
-    {{-- Count Down --}}
-    <script src="https://pbutcher.uk/flipdown/js/flipdown/flipdown.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-
-            // Set up FlipDown
-            var flipdown = new FlipDown({{ $timeS }}, {
-                    headings: ["{{ __('invite.s5') }}", "{{ __('invite.s4') }}", "{{ __('invite.s3') }}",
-                        "{{ __('invite.s2') }}"
-                    ],
-                })
-
-                // Start the countdown
-                .start()
-
-                // Do something when the countdown ends
-                .ifEnded(() => {
-                    $('.example').slideUp();
-                    $('.countUp').delay(1000).slideDown();
-                });
-        });
-    </script>
-
-    {{-- Count Up --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    @if ($invite->dateType == 'Miladi')
+    @if (!empty($invite->date))
+        {{-- Count Down --}}
+        <script src="https://pbutcher.uk/flipdown/js/flipdown/flipdown.js"></script>
         <script>
-            /* --------------------------
-             * GLOBAL VARS
-             * -------------------------- */
-            // The date you want to count down to
-            var targetDate = new Date("{{ $invite->date }} {{ $invite->time }}");
+            document.addEventListener('DOMContentLoaded', () => {
 
-            // Other date related variables
-            var days;
-            var hrs;
-            var min;
-            var sec;
+                // Set up FlipDown
+                var flipdown = new FlipDown({{ $timeS }}, {
+                        headings: ["{{ __('invite.s5') }}", "{{ __('invite.s4') }}", "{{ __('invite.s3') }}",
+                            "{{ __('invite.s2') }}"
+                        ],
+                    })
 
-            /* --------------------------
-             * ON DOCUMENT LOAD
-             * -------------------------- */
-            $(function() {
-                // Calculate time until launch date
-                timeToLaunch();
-                // Transition the current countdown from 0
-                numberTransition('#days .number', days, 1000, 'easeOutQuad');
-                numberTransition('#hours .number', hrs, 1000, 'easeOutQuad');
-                numberTransition('#minutes .number', min, 1000, 'easeOutQuad');
-                numberTransition('#seconds .number', sec, 1000, 'easeOutQuad');
-                // Begin Countdown
-                setTimeout(countDownTimer, 1001);
+                    // Start the countdown
+                    .start()
+
+                    // Do something when the countdown ends
+                    .ifEnded(() => {
+                        $('.example').slideUp();
+                        $('.countUp').delay(1000).slideDown();
+                    });
             });
-
-            /* --------------------------
-             * FIGURE OUT THE AMOUNT OF
-               TIME LEFT BEFORE LAUNCH
-             * -------------------------- */
-            function timeToLaunch() {
-                // Get the current date
-                var currentDate = new Date();
-
-                // Find the difference between dates
-                var diff = (currentDate - targetDate) / 1000;
-                var diff = Math.abs(Math.floor(diff));
-
-                // Check number of days until target
-                days = Math.floor(diff / (24 * 60 * 60));
-                sec = diff - days * 24 * 60 * 60;
-
-                // Check number of hours until target
-                hrs = Math.floor(sec / (60 * 60));
-                sec = sec - hrs * 60 * 60;
-
-                // Check number of minutes until target
-                min = Math.floor(sec / (60));
-                sec = sec - min * 60;
-            }
-
-            /* --------------------------
-             * DISPLAY THE CURRENT
-               COUNT TO LAUNCH
-             * -------------------------- */
-            function countDownTimer() {
-
-                // Figure out the time to launch
-                timeToLaunch();
-
-                // Write to countdown component
-                $("#days .number").text(days);
-                $("#hours .number").text(hrs);
-                $("#minutes .number").text(min);
-                $("#seconds .number").text(sec);
-
-                // Repeat the check every second
-                setTimeout(countDownTimer, 1000);
-            }
-
-            /* --------------------------
-             * TRANSITION NUMBERS FROM 0
-               TO CURRENT TIME UNTIL LAUNCH
-             * -------------------------- */
-            function numberTransition(id, endPoint, transitionDuration, transitionEase) {
-                // Transition numbers from 0 to the final number
-                $({
-                    numberCount: $(id).text()
-                }).animate({
-                    numberCount: endPoint
-                }, {
-                    duration: transitionDuration,
-                    easing: transitionEase,
-                    step: function() {
-                        $(id).text(Math.floor(this.numberCount));
-                    },
-                    complete: function() {
-                        $(id).text(this.numberCount);
-                    }
-                });
-            };
         </script>
-    @else
-        <script>
-            /* --------------------------
-             * GLOBAL VARS
-             * -------------------------- */
-            // The date you want to count down to
-            var targetDate = new Date("{{ $newDate }} {{ $invite->time }}");
 
-            // Other date related variables
-            var days;
-            var hrs;
-            var min;
-            var sec;
+        {{-- Count Up --}}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+        @if ($invite->dateType == 'Miladi')
+            <script>
+                /* --------------------------
+                 * GLOBAL VARS
+                 * -------------------------- */
+                // The date you want to count down to
+                var targetDate = new Date("{{ $invite->date }} {{ $invite->time }}");
 
-            /* --------------------------
-             * ON DOCUMENT LOAD
-             * -------------------------- */
-            $(function() {
-                // Calculate time until launch date
-                timeToLaunch();
-                // Transition the current countdown from 0
-                numberTransition('#days .number', days, 1000, 'easeOutQuad');
-                numberTransition('#hours .number', hrs, 1000, 'easeOutQuad');
-                numberTransition('#minutes .number', min, 1000, 'easeOutQuad');
-                numberTransition('#seconds .number', sec, 1000, 'easeOutQuad');
-                // Begin Countdown
-                setTimeout(countDownTimer, 1001);
-            });
+                // Other date related variables
+                var days;
+                var hrs;
+                var min;
+                var sec;
 
-            /* --------------------------
-             * FIGURE OUT THE AMOUNT OF
-               TIME LEFT BEFORE LAUNCH
-             * -------------------------- */
-            function timeToLaunch() {
-                // Get the current date
-                var currentDate = new Date();
-
-                // Find the difference between dates
-                var diff = (currentDate - targetDate) / 1000;
-                var diff = Math.abs(Math.floor(diff));
-
-                // Check number of days until target
-                days = Math.floor(diff / (24 * 60 * 60));
-                sec = diff - days * 24 * 60 * 60;
-
-                // Check number of hours until target
-                hrs = Math.floor(sec / (60 * 60));
-                sec = sec - hrs * 60 * 60;
-
-                // Check number of minutes until target
-                min = Math.floor(sec / (60));
-                sec = sec - min * 60;
-            }
-
-            /* --------------------------
-             * DISPLAY THE CURRENT
-               COUNT TO LAUNCH
-             * -------------------------- */
-            function countDownTimer() {
-
-                // Figure out the time to launch
-                timeToLaunch();
-
-                // Write to countdown component
-                $("#days .number").text(days);
-                $("#hours .number").text(hrs);
-                $("#minutes .number").text(min);
-                $("#seconds .number").text(sec);
-
-                // Repeat the check every second
-                setTimeout(countDownTimer, 1000);
-            }
-
-            /* --------------------------
-             * TRANSITION NUMBERS FROM 0
-               TO CURRENT TIME UNTIL LAUNCH
-             * -------------------------- */
-            function numberTransition(id, endPoint, transitionDuration, transitionEase) {
-                // Transition numbers from 0 to the final number
-                $({
-                    numberCount: $(id).text()
-                }).animate({
-                    numberCount: endPoint
-                }, {
-                    duration: transitionDuration,
-                    easing: transitionEase,
-                    step: function() {
-                        $(id).text(Math.floor(this.numberCount));
-                    },
-                    complete: function() {
-                        $(id).text(this.numberCount);
-                    }
+                /* --------------------------
+                 * ON DOCUMENT LOAD
+                 * -------------------------- */
+                $(function() {
+                    // Calculate time until launch date
+                    timeToLaunch();
+                    // Transition the current countdown from 0
+                    numberTransition('#days .number', days, 1000, 'easeOutQuad');
+                    numberTransition('#hours .number', hrs, 1000, 'easeOutQuad');
+                    numberTransition('#minutes .number', min, 1000, 'easeOutQuad');
+                    numberTransition('#seconds .number', sec, 1000, 'easeOutQuad');
+                    // Begin Countdown
+                    setTimeout(countDownTimer, 1001);
                 });
-            };
-        </script>
+
+                /* --------------------------
+                 * FIGURE OUT THE AMOUNT OF
+                   TIME LEFT BEFORE LAUNCH
+                 * -------------------------- */
+                function timeToLaunch() {
+                    // Get the current date
+                    var currentDate = new Date();
+
+                    // Find the difference between dates
+                    var diff = (currentDate - targetDate) / 1000;
+                    var diff = Math.abs(Math.floor(diff));
+
+                    // Check number of days until target
+                    days = Math.floor(diff / (24 * 60 * 60));
+                    sec = diff - days * 24 * 60 * 60;
+
+                    // Check number of hours until target
+                    hrs = Math.floor(sec / (60 * 60));
+                    sec = sec - hrs * 60 * 60;
+
+                    // Check number of minutes until target
+                    min = Math.floor(sec / (60));
+                    sec = sec - min * 60;
+                }
+
+                /* --------------------------
+                 * DISPLAY THE CURRENT
+                   COUNT TO LAUNCH
+                 * -------------------------- */
+                function countDownTimer() {
+
+                    // Figure out the time to launch
+                    timeToLaunch();
+
+                    // Write to countdown component
+                    $("#days .number").text(days);
+                    $("#hours .number").text(hrs);
+                    $("#minutes .number").text(min);
+                    $("#seconds .number").text(sec);
+
+                    // Repeat the check every second
+                    setTimeout(countDownTimer, 1000);
+                }
+
+                /* --------------------------
+                 * TRANSITION NUMBERS FROM 0
+                   TO CURRENT TIME UNTIL LAUNCH
+                 * -------------------------- */
+                function numberTransition(id, endPoint, transitionDuration, transitionEase) {
+                    // Transition numbers from 0 to the final number
+                    $({
+                        numberCount: $(id).text()
+                    }).animate({
+                        numberCount: endPoint
+                    }, {
+                        duration: transitionDuration,
+                        easing: transitionEase,
+                        step: function() {
+                            $(id).text(Math.floor(this.numberCount));
+                        },
+                        complete: function() {
+                            $(id).text(this.numberCount);
+                        }
+                    });
+                };
+            </script>
+        @else
+            <script>
+                /* --------------------------
+                 * GLOBAL VARS
+                 * -------------------------- */
+                // The date you want to count down to
+                var targetDate = new Date("{{ $newDate }} {{ $invite->time }}");
+
+                // Other date related variables
+                var days;
+                var hrs;
+                var min;
+                var sec;
+
+                /* --------------------------
+                 * ON DOCUMENT LOAD
+                 * -------------------------- */
+                $(function() {
+                    // Calculate time until launch date
+                    timeToLaunch();
+                    // Transition the current countdown from 0
+                    numberTransition('#days .number', days, 1000, 'easeOutQuad');
+                    numberTransition('#hours .number', hrs, 1000, 'easeOutQuad');
+                    numberTransition('#minutes .number', min, 1000, 'easeOutQuad');
+                    numberTransition('#seconds .number', sec, 1000, 'easeOutQuad');
+                    // Begin Countdown
+                    setTimeout(countDownTimer, 1001);
+                });
+
+                /* --------------------------
+                 * FIGURE OUT THE AMOUNT OF
+                   TIME LEFT BEFORE LAUNCH
+                 * -------------------------- */
+                function timeToLaunch() {
+                    // Get the current date
+                    var currentDate = new Date();
+
+                    // Find the difference between dates
+                    var diff = (currentDate - targetDate) / 1000;
+                    var diff = Math.abs(Math.floor(diff));
+
+                    // Check number of days until target
+                    days = Math.floor(diff / (24 * 60 * 60));
+                    sec = diff - days * 24 * 60 * 60;
+
+                    // Check number of hours until target
+                    hrs = Math.floor(sec / (60 * 60));
+                    sec = sec - hrs * 60 * 60;
+
+                    // Check number of minutes until target
+                    min = Math.floor(sec / (60));
+                    sec = sec - min * 60;
+                }
+
+                /* --------------------------
+                 * DISPLAY THE CURRENT
+                   COUNT TO LAUNCH
+                 * -------------------------- */
+                function countDownTimer() {
+
+                    // Figure out the time to launch
+                    timeToLaunch();
+
+                    // Write to countdown component
+                    $("#days .number").text(days);
+                    $("#hours .number").text(hrs);
+                    $("#minutes .number").text(min);
+                    $("#seconds .number").text(sec);
+
+                    // Repeat the check every second
+                    setTimeout(countDownTimer, 1000);
+                }
+
+                /* --------------------------
+                 * TRANSITION NUMBERS FROM 0
+                   TO CURRENT TIME UNTIL LAUNCH
+                 * -------------------------- */
+                function numberTransition(id, endPoint, transitionDuration, transitionEase) {
+                    // Transition numbers from 0 to the final number
+                    $({
+                        numberCount: $(id).text()
+                    }).animate({
+                        numberCount: endPoint
+                    }, {
+                        duration: transitionDuration,
+                        easing: transitionEase,
+                        step: function() {
+                            $(id).text(Math.floor(this.numberCount));
+                        },
+                        complete: function() {
+                            $(id).text(this.numberCount);
+                        }
+                    });
+                };
+            </script>
+        @endif
     @endif
 @endsection

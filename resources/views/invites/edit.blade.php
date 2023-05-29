@@ -72,14 +72,14 @@
                     <label for="inputAddress" class="form-label fw-bold" style="">{{ __('invite.n5') }}</label>
                     <div class="d-flex justify-content-between">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="dateT" id="Hijri"
+                            <input class="form-check-input" type="radio" name="dateT" value="Hijri" id="Hijri"
                                 @if ($invite->dateType == 'Hijri') checked @endif>
                             <label class="form-check-label" for="Hijri" id="HijriText">
                                 {{ __('invite.n6') }}
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="dateT" id="Miladi"
+                            <input class="form-check-input" type="radio" name="dateT" value="Miladi" id="Miladi"
                                 @if ($invite->dateType == 'Miladi') checked @endif>
                             <label class="form-check-label" for="Miladi" id="MiladiText">
                                 {{ __('invite.n7') }}
@@ -91,33 +91,46 @@
                 {{-- Miladi --}}
                 <div class="col-6 mt-3" style="display: none;" id="MiladiBox">
                     <label for="inputDate" class="form-label fw-bold" style="">{{ __('invite.n9') }}</label>
-                    <input type="date" class="form-control" id="inputDate" value="{{ $invite->date }}" name="dateMiladi">
+                    @if ($invite->dateType == 'Miladi')
+                        <input type="date" class="form-control" id="inputDate" value="{{ $invite->date }}"
+                            name="dateMiladi">
+                    @else
+                        <input type="date" class="form-control" id="inputDate" value=""
+                            name="dateMiladi">
+                    @endif
                 </div>
 
                 {{-- Hijiri --}}
                 <div class="col-6 mt-3" style="display: none;" id="HijriBox">
                     <label for="inputAddress" class="form-label fw-bold" style="">{{ __('invite.n8') }}</label>
-                    <input type='text' class="form-control" id="hijri-date-input" name="dateHijri"
-                        value="{{ $invite->dateType == 'Hijri' ? $invite->date : '' }}" />
+                    @if ($invite->dateType == 'Hijri')
+                        <input type='text' class="form-control" id="hijri-date-input" name="dateHijri"
+                            value="{{ $invite->date }}" />
+                    @else
+                        <input type='text' class="form-control" id="hijri-date-input" name="dateHijri" value="" />
+                    @endif
                 </div>
 
                 {{-- Event Time --}}
                 <div class="col-6 mt-3">
                     <label for="inputTime" class="form-label fw-bold" style="">{{ __('invite.n10') }}</label>
-                    <input type="time" class="form-control" id="inputTime" name="time" value="{{ $invite->time }}">
+                    <input type="time" class="form-control" id="inputTime" name="time"
+                        value="{{ $invite->time }}">
                 </div>
 
                 {{-- Event Description --}}
                 <div class="col-12 mt-3">
                     <label for="description" class="form-label fw-bold" style="">{{ __('invite.n11') }}</label>
                     <textarea id="description" style="resize: none;" rows="5" name="description" maxlength='250'
-                        onkeyup="handle()" class="form-control shadow-none py-2 fw-bold" placeholder="" aria-label="{{ __('invite.n11') }}">{{ $invite->description }}</textarea>
+                        onkeyup="handle()" class="form-control shadow-none py-2 fw-bold" placeholder=""
+                        aria-label="{{ __('invite.n11') }}">{{ $invite->description }}</textarea>
                     <p class="fw-bold" id='remaining'></p>
                 </div>
             </div>
 
             <button type="submit" class="fw-bold btn btn-primary w-100">{{ __('invite.n15') }}</button>
-            <a href="/{{ App::getLocale() }}/inv/{{ $invite->link }}" class="fw-bold btn btn-success w-100 mt-2">{{ __('invite.n16') }}</a>
+            <a href="/{{ App::getLocale() }}/{{ $invite->link }}"
+                class="fw-bold btn btn-success w-100 mt-2">{{ __('invite.n16') }}</a>
         </form>
     </div>
 

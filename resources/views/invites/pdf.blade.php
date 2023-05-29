@@ -27,8 +27,6 @@
 
         <br>
 
-
-
         <h2 style="display: inline-block;">
 
             <sup><sup><sup><sup><img style="" width="20px"
@@ -43,11 +41,13 @@
         <br>
 
         <h2>
-            <span style="color: rgba(250,44,99,1);;"> {{ $day }}</span> {{ $str2 }} {{ $event }} {{ $str1 }}
+            <span style="color: rgba(250,44,99,1);;"> {{ $day }}</span> {{ $str2 }}
+            {{ $dateT }} {{ $invite->date }} {{ $str3 }}
 
             <br>
+            <br>
 
-            {{ $dateT }} {{ $invite->date }} {{ $str3 }}
+            {{ $event }} {{ $str1 }}
         </h2>
 
         <br>

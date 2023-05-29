@@ -30,6 +30,12 @@ Route::group(['prefix' => '{lang}'], function () {
         return view('pages.index');
     });
 
+    // About Page
+    Route::get('/about', [PagesController::class, 'about'])->name('aboutPage');
+
+    // Contact Page
+    Route::get('/contact', [PagesController::class, 'contact'])->name('contact');
+
     //-----> Invites <-----//
 
     # Delete Invite Owner Photo
@@ -48,7 +54,7 @@ Route::group(['prefix' => '{lang}'], function () {
     Route::put('/invite/{link}/update', [InvitesController::class, 'update'])->name('invUpdate');
 
     # Show Invite
-    Route::get('/inv/{link}', [InvitesController::class, 'show'])->name('invShow');
+    Route::get('/{link}', [InvitesController::class, 'show'])->name('invShow');
 
     # Show Invite
     Route::delete('/inv/{link}/delete', [InvitesController::class, 'destroy'])->name('invDelete');
@@ -56,13 +62,6 @@ Route::group(['prefix' => '{lang}'], function () {
     # Create PDF OF The Invitation
     Route::get('/inv/{link}/pdf', [InvitesController::class, 'createPDF'])->name('invPDF');
 
-    // About Page
-    Route::get('/about', [PagesController::class, 'about'])->name('aboutPage');
-
-    // Contact Page
-    Route::get('/contact', [PagesController::class, 'contact'])->name('contact');
-
     // Contact Page
     Route::get('/date/{m}/{d}/{y}', [InvitesController::class, 'HijriToJD']);
-
 });
