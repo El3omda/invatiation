@@ -132,7 +132,7 @@
     <div class="container">
 
         @php
-            date_default_timezone_set(unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$_SERVER['REMOTE_ADDR']))['geoplugin_timezone'];);
+            date_default_timezone_set(unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$_SERVER['REMOTE_ADDR']))['geoplugin_timezone']);
         @endphp
 
         {{ date('d-m-Y  h:i:s A') }}
