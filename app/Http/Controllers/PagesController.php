@@ -23,6 +23,7 @@ class PagesController extends Controller
     // Send Email Function
     public function sendEmail(Request $request)
     {
+
         $name = $request->name;
         $email = $request->email;
         $subject = $request->subject;
@@ -33,9 +34,9 @@ class PagesController extends Controller
         $msg = wordwrap($msg, 70);
 
         if (mail("realemadothman@gmail.com", "رسالة من موقع انشاء الدعوات", $msg)) {
-            return redirect('/' . App::getLocale() . '/contact?done');
+            return redirect('https://inv.almiqias.com/ar/contact?done');
         } else {
-            return redirect('/' . App::getLocale() . '/contact?failed');
+            return redirect('https://inv.almiqias.com/ar/contact?failed');
         }
     }
 }

@@ -8,6 +8,9 @@
     <title>
         @yield('title', __('inc.n13'))
     </title>
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/logo.png') }}">
+
     {{-- Css --}}
 
     {{-- Bootstrap --}}
