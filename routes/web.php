@@ -20,6 +20,8 @@ Route::get('/fix', function () {
 });
 
 Route::redirect('/', '/ar');
+Route::post('/mail', [PagesController::class, 'sendEmail'])->name('sendEmail');
+
 
 Route::group(['prefix' => '{lang}'], function () {
 

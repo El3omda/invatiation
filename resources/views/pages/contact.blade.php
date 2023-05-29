@@ -87,6 +87,8 @@
 @section('content')
     <div class="container mt-3">
 
+        جاري الانهاء
+
         <section class="contact" id="contact">
             <div class="container">
                 <div class="heading text-center">
@@ -101,23 +103,23 @@
 
                     <div class="col-md-12">
 
-                        <form action="" method="POST" style="direction: rtl;">
+                        <form action="{{ route('sendEmail') }}" method="POST" style="direction: rtl;">
                             @csrf
                             @method('POST')
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control fw-bold shadow-none" placeholder="{{ __('inc.n8') }}" required>
+                                    <input type="text" class="form-control fw-bold shadow-none" name="name" placeholder="{{ __('inc.n8') }}" required>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="email" class="form-control fw-bold shadow-none" placeholder="{{ __('inc.n9') }}"
+                                    <input type="email" class="form-control fw-bold shadow-none" name="email" placeholder="{{ __('inc.n9') }}"
                                         required>
                                 </div>
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control fw-bold shadow-none" placeholder="{{ __('inc.n10') }}" required>
+                                    <input type="text" class="form-control fw-bold shadow-none" name="subject" placeholder="{{ __('inc.n10') }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control fw-bold shadow-none" rows="5" id="comment" placeholder="{{ __('inc.n11') }}" required></textarea>
+                                <textarea class="form-control fw-bold shadow-none" rows="5" id="comment" name="message" placeholder="{{ __('inc.n11') }}" required></textarea>
                             </div>
                             <button class="btn btn-block fw-bold w-100" type="submit">{{ __('inc.n12') }}</button>
                         </form>
