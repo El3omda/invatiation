@@ -87,8 +87,6 @@
 @section('content')
     <div class="container mt-3">
 
-        جاري الانهاء
-
         <section class="contact" id="contact">
             <div class="container">
                 <div class="heading text-center">
