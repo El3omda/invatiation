@@ -132,11 +132,14 @@
     <div class="container">
 
         @php
-            echo unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$_SERVER['REMOTE_ADDR']))['geoplugin_timezone'];
+            echo unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']))['geoplugin_timezone'];
             // date_default_timezone_set();
+            echo date_default_timezone_get();
         @endphp
 
-        {{ date('d-m-Y  h:i:s A') }}
+        <br>
+
+        {{ date('h:i:s A') }}
 
         {{-- Show Options If client Own This Invitation --}}
         @if ($invite->ip == $_SERVER['REMOTE_ADDR'])
