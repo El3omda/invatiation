@@ -5,6 +5,26 @@
 @endsection
 
 @section('css')
+
+    {{-- Open Graph --}}
+
+    <meta name="description" content="نقدم لك خدمة انشاء دعوات لمناسباتك مع امكانية مشاركة رابط الدعوة مع من تحب">
+
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="https://inv.almiqias.com/ar/inv/{{ $invite->link }}">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ __('invite.s16') }} {{ $invite->owner }} {{ __('invite.s17') }} {{ $invite->event }}">
+    <meta property="og:description" content="{{ $invite->description }}">
+    <meta property="og:image" content="{{ !empty($invite->photo) ? 'https://inv.almiqias.com/' . $invite->photo : 'https://inv.almiqias.com/assets/images/default.jpg'}}">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="inv.almiqias.com">
+    <meta property="twitter:url" content="https://inv.almiqias.com/ar/inv/{{ $invite->link }}">
+    <meta name="twitter:title" content="{{ __('invite.s16') }} {{ $invite->owner }} {{ __('invite.s17') }} {{ $invite->event }}">
+    <meta name="twitter:description" content="{{ $invite->description }}">
+    <meta name="twitter:image" content="{{ !empty($invite->photo) ? 'https://inv.almiqias.com/' . $invite->photo : 'https://inv.almiqias.com/assets/images/default.jpg'}}">
+
     <link rel="stylesheet" href="https://pbutcher.uk/flipdown/css/flipdown/flipdown.css">
     <style>
         .rotor-group-heading,
@@ -79,30 +99,30 @@
 
 
 @php
-    
+
     function HijriToJD($m, $d, $y)
     {
         return (int) ((11 * $y + 3) / 30) + 354 * $y + 30 * $m - (int) (($m - 1) / 2) + $d + 1948440 - 385;
     }
-    
+
     // Count Down Time Stamp
-    
+
     #Check Date Type
     if ($invite->dateType == 'Miladi') {
         $d = DateTime::createFromFormat('Y-m-d H:i', $invite->date . ' ' . $invite->time);
         $timeS = $d->getTimestamp();
     } else {
         $exploadeDate = explode('-', $invite->date);
-    
+
         $date = HijriToJD($exploadeDate[1], $exploadeDate[2], $exploadeDate[0]);
-    
+
         $originalDate = jdtogregorian($date);
         $newDate = date('Y-m-d', strtotime($originalDate));
-    
+
         $d = DateTime::createFromFormat('Y-m-d H:i', $newDate . ' ' . $invite->time);
         $timeS = $d->getTimestamp();
     }
-    
+
 @endphp
 
 @section('content')
