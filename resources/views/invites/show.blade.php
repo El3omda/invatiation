@@ -5,7 +5,6 @@
 @endsection
 
 @section('css')
-
     {{-- Open Graph --}}
 
     <meta name="description" content="نقدم لك خدمة انشاء دعوات لمناسباتك مع امكانية مشاركة رابط الدعوة مع من تحب">
@@ -13,17 +12,21 @@
     <!-- Facebook Meta Tags -->
     <meta property="og:url" content="https://inv.almiqias.com/ar/inv/{{ $invite->link }}">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="{{ __('invite.s16') }} {{ $invite->owner }} {{ __('invite.s17') }} {{ $invite->event }}">
+    <meta property="og:title"
+        content="{{ __('invite.s16') }} {{ $invite->owner }} {{ __('invite.s17') }} {{ $invite->event }}">
     <meta property="og:description" content="{{ $invite->description }}">
-    <meta property="og:image" content="{{ !empty($invite->photo) ? 'https://inv.almiqias.com/' . $invite->photo : 'https://inv.almiqias.com/assets/images/default.jpg'}}">
+    <meta property="og:image"
+        content="{{ !empty($invite->photo) ? 'https://inv.almiqias.com/' . $invite->photo : 'https://inv.almiqias.com/assets/images/default.jpg' }}">
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta property="twitter:domain" content="inv.almiqias.com">
     <meta property="twitter:url" content="https://inv.almiqias.com/ar/inv/{{ $invite->link }}">
-    <meta name="twitter:title" content="{{ __('invite.s16') }} {{ $invite->owner }} {{ __('invite.s17') }} {{ $invite->event }}">
+    <meta name="twitter:title"
+        content="{{ __('invite.s16') }} {{ $invite->owner }} {{ __('invite.s17') }} {{ $invite->event }}">
     <meta name="twitter:description" content="{{ $invite->description }}">
-    <meta name="twitter:image" content="{{ !empty($invite->photo) ? 'https://inv.almiqias.com/' . $invite->photo : 'https://inv.almiqias.com/assets/images/default.jpg'}}">
+    <meta name="twitter:image"
+        content="{{ !empty($invite->photo) ? 'https://inv.almiqias.com/' . $invite->photo : 'https://inv.almiqias.com/assets/images/default.jpg' }}">
 
     <link rel="stylesheet" href="https://pbutcher.uk/flipdown/css/flipdown/flipdown.css">
     <style>
@@ -128,10 +131,14 @@
 @section('content')
     <div class="container">
 
+        @php
+            date_default_timezone_set(unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$_SERVER['REMOTE_ADDR']))['geoplugin_timezone'];);
+        @endphp
+
         {{ date('d-m-Y  h:i:s A') }}
 
         {{-- Show Options If client Own This Invitation --}}
-        @if ($invite->ip == $_SERVER['HTTP_X_FORWARDED_FOR'])
+        @if ($invite->ip == $_SERVER['REMOTE_ADDR'])
             <div class="d-flex justify-content-between my-5 dispr">
                 <div>
                     <a href="{{ route('invEdit', [App::getLocale(), $invite->id]) }}" class="btn btn-primary">
