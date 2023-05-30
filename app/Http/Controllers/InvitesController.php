@@ -123,9 +123,9 @@ class InvitesController extends Controller
      */
     public function update($lang, Request $request, Invite $link)
     {
-        if ($link->ip != $_SERVER['REMOTE_ADDR']) {
-            return redirect('/?error');
-        }
+        // if ($link->ip != $_SERVER['REMOTE_ADDR']) {
+        //     return redirect('/?error');
+        // }
 
         $inputs = [
             'owner' => $request->owner,
