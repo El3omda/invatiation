@@ -209,14 +209,12 @@ class InvitesController extends Controller
         }
 
         $options = new Options();
-        $options->set('defaultFont', 'Courier');
         $options->set('isRemoteEnabled', true);
         $dompdf = new Dompdf($options);
 
         $Arabic = new Arabic();
 
-        // $owner = $Arabic->utf8Glyphs($link->owner);
-        $owner = $link->owner;
+        $owner = $Arabic->utf8Glyphs($link->owner);
         $description = $Arabic->utf8Glyphs($link->description);
         $str1 = $Arabic->utf8Glyphs('المناسبة : ');
         $event = $Arabic->utf8Glyphs($link->event);

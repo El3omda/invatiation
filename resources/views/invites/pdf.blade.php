@@ -6,15 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>
-        @font-face {
-            font-family: 'arabic';
-            src: url('https://inv.almiqias.com/assets/fonts/ar.ttf') format("truetype");
-        }
-
-        @font-face {
-            font-family: 'english';
-            src: url('https://inv.almiqias.com/assets/fonts/en.ttf') format("truetype");
-        }
 
         * {
             font-family: DejaVu Sans, sans-serif;
@@ -43,7 +34,6 @@
             {{ $owner }}
         </h1>
 
-        <br>
 
         <h2 style="display: inline-block;">
 
@@ -83,6 +73,9 @@
         </h2>
 
         <br>
+
+        <a href="https://inv.almiqias.com/ar">inv.almiqias.com</a>
+
     </center>
 
 </body>
