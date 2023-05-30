@@ -67,9 +67,19 @@
             <br>
             <br>
 
-            <img src="https://inv.almiqias.com/assets/images/decoration.jpg" alt="">
+            <img src="https://i.ibb.co/bbm1xM5/decoration.jpg" style="width: 300px;" alt="">
+
+            <br>
+            <br>
 
             {{ $event }} {{ $str1 }}
+
+            <br>
+            <br>
+
+            <img src="https://i.ibb.co/bbm1xM5/decoration.jpg" style="width: 300px;" alt="">
+
+            <br>
         </h2>
 
         <br>
