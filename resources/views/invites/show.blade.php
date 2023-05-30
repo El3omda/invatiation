@@ -408,6 +408,8 @@
                 // The date you want to count down to
                 var targetDate = new Date("{{ $invite->date }} {{ $invite->time }}");
 
+                targetDate.setHours(targetDate.getHours() - 1);
+
                 // Other date related variables
                 var days;
                 var hrs;
@@ -502,7 +504,7 @@
                  * -------------------------- */
                 // The date you want to count down to
                 var targetDate = new Date("{{ $newDate }} {{ $invite->time }}");
-
+                targetDate.setHours(targetDate.getHours() - 1);
                 // Other date related variables
                 var days;
                 var hrs;
