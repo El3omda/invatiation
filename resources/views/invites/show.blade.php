@@ -101,9 +101,13 @@
 @php
 
     $tz = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']))['geoplugin_timezone'];
+    echo '<br>' . $tz . '<br>';
     if ($tz == null) {
         date_default_timezone_set('Asia/Riyadh');
     }
+
+    echo '<br>' . date_default_timezone_get() . '<br>';
+
 
     function HijriToJD($m, $d, $y)
     {
