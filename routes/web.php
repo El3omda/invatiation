@@ -42,7 +42,7 @@ Route::group(['prefix' => '{lang}'], function () {
     Route::get('/photo/{link}/delete', [InvitesController::class, 'destroyPhoto'])->name('destroyPhoto');
 
     # Create Invite
-    Route::get('/invite/add', [InvitesController::class, 'create']);
+    Route::get('/add', [InvitesController::class, 'create']);
 
     # Store Invite
     Route::post('/invite/store', [InvitesController::class, 'store'])->name('invStore');
@@ -61,6 +61,7 @@ Route::group(['prefix' => '{lang}'], function () {
 
     # Create PDF OF The Invitation
     Route::get('/inv/{link}/pdf', [InvitesController::class, 'createPDF'])->name('invPDF');
+    Route::get('/inv/{link}/pdf/show', [InvitesController::class, 'PDF']);
 
     // Contact Page
     Route::get('/date/{m}/{d}/{y}', [InvitesController::class, 'HijriToJD']);

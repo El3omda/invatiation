@@ -87,49 +87,16 @@
 @section('content')
     <div class="container mt-3">
 
-        <section class="contact" id="contact">
-            <div class="container">
-                <div class="heading text-center">
-                    <h2>{{ __('inc.n5') }}
-                        <span> {{ __('inc.n6') }} </span>
-                    </h2>
-                    <p class="fw-bold text-secondary">
-                        {{ __('inc.n7') }}
-                    </p>
-                </div>
-                <div class="row">
-
-                    <div class="col-md-12">
-
-                        <form action="{{ route('sendEmail') }}" method="POST" style="direction: rtl;">
-                            @csrf
-                            @method('POST')
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control fw-bold shadow-none" name="name" placeholder="{{ __('inc.n8') }}" required>
-                                </div>
-                                <div class="col-sm-6">
-                                    <input type="email" class="form-control fw-bold shadow-none" name="email" placeholder="{{ __('inc.n9') }}"
-                                        required>
-                                </div>
-                                <div class="col-sm-12">
-                                    <input type="text" class="form-control fw-bold shadow-none" name="subject" placeholder="{{ __('inc.n10') }}" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <textarea class="form-control fw-bold shadow-none" rows="5" id="comment" name="message" placeholder="{{ __('inc.n11') }}" required></textarea>
-                            </div>
-                            <button class="btn btn-block fw-bold w-100" type="submit">{{ __('inc.n12') }}</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <div class="text-center mt-5 pt-5">
+            <i class="fa-solid fa-envelope fa-2x"></i>
+            <br>
+            <a href="mailto:Contact@almiqias.com" class="fw-bold text-decoration-none">Contact@almiqias.com</a>
+        </div>
 
     </div>
 
     <footer class="text-center py-3 text-white fw-bold mt-5"
-        style="background: linear-gradient(90deg, rgba(250,44,99,1) 0%, rgba(251,167,15,1) 100%);">
+        style="position: absolute;bottom: 0;width: 100%;background: linear-gradient(90deg, rgba(250,44,99,1) 0%, rgba(251,167,15,1) 100%);">
         {{ __('inc.n4') }} {{ date('Y') }}
     </footer>
 @endsection

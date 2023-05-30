@@ -130,7 +130,7 @@
 
             <button type="submit" class="fw-bold btn btn-primary w-100">{{ __('invite.n15') }}</button>
             <a href="/{{ App::getLocale() }}/{{ $invite->link }}"
-                class="fw-bold btn btn-success w-100 mt-2">{{ __('invite.n16') }}</a>
+                class="fw-bold btn btn-success w-100 mt-2 mb-3">{{ __('invite.n16') }}</a>
         </form>
     </div>
 
@@ -184,7 +184,17 @@
             $('#MiladiBox').slideUp();
             $('#HijriBox').slideDown();
         });
+
+        $('#Hijri').click(function() {
+            $('#MiladiBox').slideUp();
+            $('#HijriBox').slideDown();
+        });
+
         $('#MiladiText').click(function() {
+            $('#HijriBox').slideUp();
+            $('#MiladiBox').slideDown();
+        });
+        $('#Miladi').click(function() {
             $('#HijriBox').slideUp();
             $('#MiladiBox').slideDown();
         });

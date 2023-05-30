@@ -98,11 +98,12 @@
     </style>
 @endsection
 
-
 @php
 
     $tz = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']))['geoplugin_timezone'];
-    date_default_timezone_set($tz);
+    if ($tz == null) {
+        date_default_timezone_set('Asia/Riyadh');
+    }
 
     function HijriToJD($m, $d, $y)
     {
@@ -177,43 +178,51 @@
             <br>
 
             {{-- Invitation Description --}}
-            <h4 class="fw-bold">
-                <sup><sup><i class="fa-sharp fa-solid fa-quote-left" style="color: rgba(250,44,99,1);"></i></sup></sup>
+            <h4 class="fw-bold dir">
+                @if (App::getLocale() == 'en')
+                    <sub><sub><i class="fa-sharp fa-solid fa-quote-right" style="color: rgba(250,44,99,1);"></i></sub></sub>
+                @else
+                    <sup><sup><i class="fa-sharp fa-solid fa-quote-left" style="color: rgba(250,44,99,1);"></i></sup></sup>
+                @endif
                 {{ $invite->description }}
-                <sub><sub><i class="fa-sharp fa-solid fa-quote-right" style="color: rgba(250,44,99,1);"></i></sub></sub>
+                @if (App::getLocale() == 'en')
+                    <sup><sup><i class="fa-sharp fa-solid fa-quote-left" style="color: rgba(250,44,99,1);"></i></sup></sup>
+                @else
+                    <sub><sub><i class="fa-sharp fa-solid fa-quote-right" style="color: rgba(250,44,99,1);"></i></sub></sub>
+                @endif
             </h4>
 
             <br>
             {{-- Invitation Date And Time --}}
             @if (!empty($invite->date))
-            <h4 class="fw-bold">
-                يوم
-                <span style="color: rgba(250,44,99,1);">
-                    @php
-                        $day = date('l', $timeS);
-                        if ($day == 'Saturday') {
-                            echo 'السبت';
-                        } elseif ($day == 'Sunday') {
-                            echo 'الأحد';
-                        } elseif ($day == 'Monday') {
-                            echo 'الإثنين';
-                        } elseif ($day == 'Tuesday') {
-                            echo 'الثلاثاء';
-                        } elseif ($day == 'Wednesday') {
-                            echo 'الأربعاء';
-                        } elseif ($day == 'Thursday') {
-                            echo 'الخميس';
-                        } elseif ($day == 'Friday') {
-                            echo 'الجمعة';
-                        }
-                    @endphp
-                </span>
-                الموافق
-                <span style="color: rgba(250,44,99,1);">{{ $invite->date }}</span>
-                {{ $invite->dateType == 'Hijri' ? 'هـ' : 'مـ' }}
-                <br><br>
-                المناسبة : {{ $invite->event }}
-            </h4>
+                <h4 class="fw-bold">
+                    يوم
+                    <span style="color: rgba(250,44,99,1);">
+                        @php
+                            $day = date('l', $timeS);
+                            if ($day == 'Saturday') {
+                                echo 'السبت';
+                            } elseif ($day == 'Sunday') {
+                                echo 'الأحد';
+                            } elseif ($day == 'Monday') {
+                                echo 'الإثنين';
+                            } elseif ($day == 'Tuesday') {
+                                echo 'الثلاثاء';
+                            } elseif ($day == 'Wednesday') {
+                                echo 'الأربعاء';
+                            } elseif ($day == 'Thursday') {
+                                echo 'الخميس';
+                            } elseif ($day == 'Friday') {
+                                echo 'الجمعة';
+                            }
+                        @endphp
+                    </span>
+                    الموافق
+                    <span style="color: rgba(250,44,99,1);">{{ $invite->date }}</span>
+                    {{ $invite->dateType == 'Hijri' ? 'هـ' : 'مـ' }}
+                    <br><br>
+                    المناسبة : {{ $invite->event }}
+                </h4>
             @endif
         </div>
 
@@ -257,11 +266,6 @@
                 <input type="text" style="width: 0;display: none;" value="{{ url()->full() }}" id="url">
                 <i class="fa-solid fa-copy"></i>
                 <span>{{ __('invite.s6') }}</span>
-            </a>
-
-            <a onclick="print()" class="btn btn-warning mb-2">
-                <i class="fa-solid fa-print"></i>
-                {{ __('invite.s7') }}
             </a>
 
             <a href="https://www.facebook.com/sharer/sharer.php?u={{ url()->full() }}" target="_blank"
@@ -313,8 +317,8 @@
         <br>
         <br>
 
-        <div class="text-center dispr">
-            <a href="/{{ App::getLocale() }}/invite/add"
+        <div class="text-center dispr mb-3">
+            <a href="/{{ App::getLocale() }}/add"
                 style="background: linear-gradient(90deg, rgba(250,44,99,1) 0%, rgba(251,167,15,1) 100%);"
                 class="btn fw-bold text-white p-3 mt-5">{{ __('home.h2') }}</a>
         </div>

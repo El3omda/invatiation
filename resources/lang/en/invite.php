@@ -13,7 +13,7 @@ return [
     'n9' => 'Event Date (Gregorian)',
     'n10' => 'The Time Of The Occasion',
     'n11' => 'Invitation Description',
-    'n12' => 'Add New Invitation',
+    'n12' => 'Add a new invitation',
     'n13' => 'The Number Of Characters Left',
     'n14' => 'Edit Invitation Data',
     'n15' => 'Edit Invitation',
