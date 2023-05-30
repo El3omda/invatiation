@@ -132,6 +132,8 @@
 
 @endphp
 
+{{ date('H:i:s a') }}
+
 @section('content')
     <div class="container">
 
