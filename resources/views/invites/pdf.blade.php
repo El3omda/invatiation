@@ -9,18 +9,14 @@
         @font-face {
             font-family: 'arabic';
             src: url('https://inv.almiqias.com/assets/fonts/ar.ttf') format("truetype");
-            font-weight: 400;
-            font-style: normal;
         }
 
         @font-face {
             font-family: 'english';
             src: url('https://inv.almiqias.com/assets/fonts/en.ttf') format("truetype");
-            font-weight: 400;
-            font-style: normal;
         }
 
-        .ar {
+        * {
             font-family: DejaVu Sans, sans-serif;
         }
 
