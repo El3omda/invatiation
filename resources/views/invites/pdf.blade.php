@@ -8,14 +8,14 @@
     <style>
         @font-face {
             font-family: 'arabic';
-            src: url('https://news-platform.net/ar.ttf') format("truetype");
+            src: url('https://inv.almiqias.com/assets/fonts/ar.ttf') format("truetype");
             font-weight: 400;
             font-style: normal;
         }
 
         @font-face {
             font-family: 'english';
-            src: url('http://127.0.0.1:8000/assets/fonts/en.ttf') format("truetype");
+            src: url('https://inv.almiqias.com/assets/fonts/en.ttf') format("truetype");
             font-weight: 400;
             font-style: normal;
         }
