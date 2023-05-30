@@ -33,7 +33,7 @@
 
     <br><br><br><br>
     <center>
-        <img style="border-radius: 50%;padding: 5px;border: 5px solid #c79435;" width="200px" height="200px"
+        <img style="border-radius: 50%;padding: 5px;border: 7px solid #c79435;" width="200px" height="200px"
             src="{{ !empty($invite->photo) ? 'https://inv.almiqias.com/' . $invite->photo : 'https://inv.almiqias.com/assets/images/default.jpg' }}"
             alt="Logo" />
         <br>
@@ -59,11 +59,15 @@
         <br>
 
         <h2>
-            <span style="color: rgba(250,44,99,1);;"> {{ $day }}</span> {{ $str2 }}
             {{ $dateT }} {{ $invite->date }} {{ $str3 }}
+
+            <span style="color: rgba(250,44,99,1);;"> {{ $day }}</span> {{ $str2 }}
 
             <br>
             <br>
+            <br>
+
+            <img src="https://inv.almiqias.com/assets/images/decoration.jpg" alt="">
 
             {{ $event }} {{ $str1 }}
         </h2>
