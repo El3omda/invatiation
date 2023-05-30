@@ -28,12 +28,12 @@
 
 <body>
 
-    <img src="https://i.ibb.co/XDnC1Zs/image.jpg"
+    <img src="https://i.ibb.co/sVw86Hg/image.jpg"
         style="position: absolute;top: -50px;left: -40px;right: -30px;bottom: -20px;width: 785px;height: 1130px;z-index: -1;">
 
     <br><br><br><br>
     <center>
-        <img style="border-radius: 50%;padding: 5px;border: 2px solid #c79435;" width="200px" height="200px"
+        <img style="border-radius: 50%;padding: 5px;border: 5px solid #c79435;" width="200px" height="200px"
             src="{{ !empty($invite->photo) ? 'https://inv.almiqias.com/' . $invite->photo : 'https://inv.almiqias.com/assets/images/default.jpg' }}"
             alt="Logo" />
         <br>
