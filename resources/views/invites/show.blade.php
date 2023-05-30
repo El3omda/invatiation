@@ -104,6 +104,8 @@
     echo '<br>' . $tz . '<br>';
     if ($tz == null) {
         date_default_timezone_set('Asia/Riyadh');
+    } else {
+        date_default_timezone_set($tz);
     }
 
     echo '<br>' . date_default_timezone_get() . '<br>';
