@@ -194,18 +194,22 @@
                     {{-- <sup><sup><i class="fa-sharp fa-solid fa-quote-left" style="color: rgba(250,44,99,1);"></i></sup></sup> --}}
                     en
                 @else
-                1
                     <sup><sup><i class="fa-sharp fa-solid fa-quote-right" style="color: rgba(250,44,99,1);"></i></sup></sup>
                 @endif
 
                 {{ $invite->description }}
 
-                @if (!preg_match('/[^A-Za-z0-9]/', $invite->description))
+                @if (!preg_match('/[^A-Za-z]/', $invite->description))
                     {{-- <sup><sup><i class="fa-sharp fa-solid fa-quote-left" style="color: rgba(250,44,99,1);"></i></sup></sup> --}}
                     en
                 @else
-                1
                     <sub><sub><i class="fa-sharp fa-solid fa-quote-left" style="color: rgba(250,44,99,1);"></i></sub></sub>
+                @endif
+
+                @if (!preg_match('/[^A-Za-z0-9]/', $invite->description))
+                    English
+                @else
+                    Arabic
                 @endif
             </h4>
 
