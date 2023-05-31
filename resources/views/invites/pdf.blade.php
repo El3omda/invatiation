@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>
-
         * {
             font-family: DejaVu Sans, sans-serif;
         }
@@ -44,29 +43,56 @@
 
         <br>
 
-        <h2>
-            {{ $dateT }} {{ $invite->date }} {{ $str3 }}
+        @if (App::getLocale() == 'ar')
+            <h2>
+                {{ $dateT }} {{ $invite->date }} {{ $str3 }}
 
-            <span style="color: rgba(250,44,99,1);;"> {{ $day }}</span> {{ $str2 }}
+                <span style="color: rgba(250,44,99,1);;"> {{ $day }}</span> {{ $str2 }}
 
-            <br>
-            <br>
-            <br>
+                <br>
+                <br>
+                <br>
 
-            <img src="https://i.ibb.co/bbm1xM5/decoration.jpg" style="width: 300px;" alt="">
+                <img src="https://i.ibb.co/bbm1xM5/decoration.jpg" style="width: 300px;" alt="">
 
-            <br>
-            <br>
+                <br>
+                <br>
 
-            {{ $event }} {{ $str1 }}
+                {{ $event }} {{ $str1 }}
 
-            <br>
-            <br>
+                <br>
+                <br>
 
-            <img src="https://i.ibb.co/bbm1xM5/decoration.jpg" style="width: 300px;" alt="">
+                <img src="https://i.ibb.co/bbm1xM5/decoration.jpg" style="width: 300px;" alt="">
 
-            <br>
-        </h2>
+                <br>
+            </h2>
+        @else
+            <h2>
+
+                {{ $str2 }} <span style="color: rgba(250,44,99,1);;"> {{ $day }}</span>
+
+                {{ $str3 }} {{ $invite->date }} {{ $dateT }}
+
+                <br>
+                <br>
+                <br>
+
+                <img src="https://i.ibb.co/bbm1xM5/decoration.jpg" style="width: 300px;" alt="">
+
+                <br>
+                <br>
+
+                {{ $str1 }} {{ $event }}
+
+                <br>
+                <br>
+
+                <img src="https://i.ibb.co/bbm1xM5/decoration.jpg" style="width: 300px;" alt="">
+
+                <br>
+            </h2>
+        @endif
 
         <br>
 

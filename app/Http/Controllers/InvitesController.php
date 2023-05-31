@@ -231,9 +231,18 @@ class InvitesController extends Controller
 
         $owner = $Arabic->utf8Glyphs($link->owner);
         $description = $Arabic->utf8Glyphs($link->description);
-        $str1 = $Arabic->utf8Glyphs('المناسبة : ');
+
+        if ($lang == 'ar') {
+            $str1 = $Arabic->utf8Glyphs('المناسبة : ');
+            $str2 = $Arabic->utf8Glyphs('يوم');
+            $str3 = $Arabic->utf8Glyphs('الموافق');
+        } else {
+            $str1 = $Arabic->utf8Glyphs('Event : ');
+            $str2 = 'On';
+            $str3 = $Arabic->utf8Glyphs(' At ');
+        }
+
         $event = $Arabic->utf8Glyphs($link->event);
-        $str2 = $Arabic->utf8Glyphs('يوم');
 
         #Check Date Type
         if ($link->dateType == 'Miladi') {
@@ -252,12 +261,19 @@ class InvitesController extends Controller
 
 
         $ddd = $Arabic->utf8Glyphs($dd);
-        $str3 = $Arabic->utf8Glyphs('الموافق');
 
         if ($link->dateType == 'Miladi') {
-            $dateT = $Arabic->utf8Glyphs('مـ');
+            if ($lang == 'ar') {
+                $dateT = $Arabic->utf8Glyphs('مـ');
+            } else {
+                $dateT = 'AD';
+            }
         } else {
-            $dateT = $Arabic->utf8Glyphs('هـ');
+            if ($lang == 'ar') {
+                $dateT = $Arabic->utf8Glyphs('هـ');
+            } else {
+                $dateT = 'Hijri';
+            }
         }
 
         $dompdf->loadHtml(view('invites.pdf', [

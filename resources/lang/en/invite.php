@@ -3,8 +3,8 @@
 return [
 
     'n1' => 'New Invite',
-    'n2' => 'Photo Of the Invitee',
-    'n3' => 'Name Of Invitee',
+    'n2' => 'Invitation Photo',
+    'n3' => 'Name of inviter',
     'n4' => 'Invitation Occasion',
     'n5' => 'Date Type',
     'n6' => 'Hijri Date',

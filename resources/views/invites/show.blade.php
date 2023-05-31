@@ -110,7 +110,6 @@
 
     // echo '<br>' . date_default_timezone_get() . '<br>';
 
-
     function HijriToJD($m, $d, $y)
     {
         return (int) ((11 * $y + 3) / 30) + 354 * $y + 30 * $m - (int) (($m - 1) / 2) + $d + 1948440 - 385;
@@ -202,15 +201,40 @@
             {{-- Invitation Date And Time --}}
             @if (!empty($invite->date))
                 <h4 class="fw-bold">
-                    يوم
+                    @if (App::getLocale() == 'ar')
+                        يوم
+                    @else
+                        On
+                    @endif
                     <span style="color: rgba(250,44,99,1);">
                         {{ $day }}
                     </span>
-                    الموافق
+
+                    @if (App::getLocale() == 'ar')
+                        الموافق
+                    @else
+                        At
+                    @endif
                     <span style="color: rgba(250,44,99,1);">{{ $invite->date }}</span>
-                    {{ $invite->dateType == 'Hijri' ? 'هـ' : 'مـ' }}
+                    @if ($invite->dateType == 'Hijri')
+                        @if (App::getLocale() == 'ar')
+                            'هـ'
+                        @else
+                            Hijri
+                        @endif
+                    @else
+                        @if (App::getLocale() == 'ar')
+                            'مـ'
+                        @else
+                            AD
+                        @endif
+                    @endif
                     <br><br>
-                    المناسبة : {{ $invite->event }}
+                    @if (App::getLocale() == 'ar')
+                        المناسبة
+                    @else
+                        Event
+                    @endif : {{ $invite->event }}
                 </h4>
             @endif
         </div>
