@@ -189,7 +189,7 @@
                     {{-- <sup><sup><i class="fa-sharp fa-solid fa-quote-left" style="color: rgba(250,44,99,1);"></i></sup></sup> --}}
                     en
                 @else
-                    <sub><sub><i class="fa-sharp fa-solid fa-quote-right" style="color: rgba(250,44,99,1);"></i></sub></sub>
+                    <sup><sup><i class="fa-sharp fa-solid fa-quote-right" style="color: rgba(250,44,99,1);"></i></sup></sup>
                 @endif
 
                 {{ $invite->description }}
