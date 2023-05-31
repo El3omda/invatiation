@@ -191,7 +191,7 @@
                     <sub><sub><i class="fa-sharp fa-solid fa-quote-right" style="color: rgba(250,44,99,1);"></i></sub></sub>
                 @endif
                 {{ $invite->description }}
-                @if (App::getLocale() == 'en')
+                @if (!preg_match('/[^A-Za-z0-9]/', $invite->description))
                     <sub><sub><i class="fa-sharp fa-solid fa-quote-right" style="color: rgba(250,44,99,1);"></i></sub></sub>
                 @else
                     <sup><sup><i class="fa-sharp fa-solid fa-quote-left" style="color: rgba(250,44,99,1);"></i></sup></sup>
