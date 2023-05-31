@@ -185,15 +185,37 @@
             {{-- Invitation Description --}}
             <h4 class="fw-bold dir">
                 @if (App::getLocale() == 'en')
-                    <sup><sup><i class="fa-sharp fa-solid fa-quote-left" style="color: rgba(250,44,99,1);"></i></sup></sup>
+                    @if (App::getLocale() == 'en')
+                        <sup><sup><i class="fa-sharp fa-solid fa-quote-left"
+                                    style="color: rgba(250,44,99,1);"></i></sup></sup>
+                    @else
+                        <sub><sub><i class="fa-sharp fa-solid fa-quote-right"
+                                    style="color: rgba(250,44,99,1);"></i></sub></sub>
+                    @endif
+                    {{ $invite->description }}
+                    @if (App::getLocale() == 'en')
+                        <sub><sub><i class="fa-sharp fa-solid fa-quote-right"
+                                    style="color: rgba(250,44,99,1);"></i></sub></sub>
+                    @else
+                        <sup><sup><i class="fa-sharp fa-solid fa-quote-left"
+                                    style="color: rgba(250,44,99,1);"></i></sup></sup>
+                    @endif
                 @else
-                    <sub><sub><i class="fa-sharp fa-solid fa-quote-right" style="color: rgba(250,44,99,1);"></i></sub></sub>
-                @endif
-                {{ $invite->description }}
-                @if (App::getLocale() == 'en')
-                    <sub><sub><i class="fa-sharp fa-solid fa-quote-right" style="color: rgba(250,44,99,1);"></i></sub></sub>
-                @else
-                    <sup><sup><i class="fa-sharp fa-solid fa-quote-left" style="color: rgba(250,44,99,1);"></i></sup></sup>
+                    @if (App::getLocale() == 'en')
+                        <sub><sub><i class="fa-sharp fa-solid fa-quote-right"
+                                    style="color: rgba(250,44,99,1);"></i></sub></sub>
+                    @else
+                        <sup><sup><i class="fa-sharp fa-solid fa-quote-left"
+                                    style="color: rgba(250,44,99,1);"></i></sup></sup>
+                    @endif
+                    {{ $invite->description }}
+                    @if (App::getLocale() == 'en')
+                        <sup><sup><i class="fa-sharp fa-solid fa-quote-left"
+                                    style="color: rgba(250,44,99,1);"></i></sup></sup>
+                    @else
+                        <sub><sub><i class="fa-sharp fa-solid fa-quote-right"
+                                    style="color: rgba(250,44,99,1);"></i></sub></sub>
+                    @endif
                 @endif
             </h4>
 
