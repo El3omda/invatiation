@@ -218,13 +218,13 @@
                     <span style="color: rgba(250,44,99,1);">{{ $invite->date }}</span>
                     @if ($invite->dateType == 'Hijri')
                         @if (App::getLocale() == 'ar')
-                            'هـ'
+                            هـ
                         @else
                             Hijri
                         @endif
                     @else
                         @if (App::getLocale() == 'ar')
-                            'مـ'
+                            مـ
                         @else
                             AD
                         @endif
