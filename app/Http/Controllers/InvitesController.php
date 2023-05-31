@@ -116,8 +116,11 @@ class InvitesController extends Controller
             $timeS = $d->getTimestamp();
         }
 
-        $dd = Hijrian::gregory($invite->date)->translatedFormat('l');
-
+        if ($invite->dateType == 'Hijri') {
+            $dd = Hijrian::gregory($invite->date)->translatedFormat('l');
+        } else {
+            $dd = Carbon::createFromFormat('Y-m-d', $invite->date)->translatedFormat('l');
+        }
 
         return view('invites.show', [
             'invite' => $invite,
@@ -257,7 +260,11 @@ class InvitesController extends Controller
             $timeS = $d->getTimestamp();
         }
 
-        $dd = Hijrian::gregory($link->date)->translatedFormat('l');
+        if ($link->dateType == 'Hijri') {
+            $dd = Hijrian::gregory($link->date)->translatedFormat('l');
+        } else {
+            $dd = Carbon::createFromFormat('Y-m-d', $link->date)->translatedFormat('l');
+        }
 
 
         $ddd = $Arabic->utf8Glyphs($dd);
