@@ -78,7 +78,7 @@
                 {{-- Miladi --}}
                 <div class="col-6 mt-3" style="display: none;" id="MiladiBox">
                     <label for="inputDate" class="form-label fw-bold" style="">{{ __('invite.n9') }}</label>
-                    <input type="date" class="form-control" id="inputDate" value="{{ old('dateMiladi') }}"
+                    <input type="date" class="form-control" id="inputDate" value="{{ old('dateMiladi') }}" required
                         name="dateMiladi">
                 </div>
 
