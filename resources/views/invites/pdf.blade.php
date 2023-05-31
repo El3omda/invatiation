@@ -32,12 +32,23 @@
 
         <h2 style="display: inline-block;">
 
-            <sup><sup><sup><sup><img style="" width="20px"
-                                src="https://i.ibb.co/4RnzQKH/double-quotes-2.jpg" /></sup></sup></sup></sup>
+            @if (!preg_match('/[^A-Za-z0-9]/', $invite->description))
+                <sup><sup><sup><sup><img style="" width="20px"
+                                    src="https://i.ibb.co/4RnzQKH/double-quotes-2.jpg" /></sup></sup></sup></sup>
+            @else
+                <sup><sup><sup><sup><img width="20px"
+                                    src="https://i.ibb.co/7SXy4Vz/down.jpg" /></sup></sup></sup></sup>
+            @endif
 
             {{ \App\Http\Controllers\InvitesController::remove_emoji($description) }}
 
-            <sub><sub><sub><sub><img width="20px" src="https://i.ibb.co/7SXy4Vz/down.jpg" /></sub></sub></sub></sub>
+            @if (!preg_match('/[^A-Za-z]/', $invite->description))
+                <sub><sub><sub><sub><img width="20px"
+                                    src="https://i.ibb.co/7SXy4Vz/down.jpg" /></sub></sub></sub></sub>
+            @else
+                <sub><sub><sub><sub><img style="" width="20px"
+                                    src="https://i.ibb.co/4RnzQKH/double-quotes-2.jpg" /></sub></sub></sub></sub>
+            @endif
 
         </h2>
 
