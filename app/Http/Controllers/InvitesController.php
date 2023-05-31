@@ -85,14 +85,14 @@ class InvitesController extends Controller
 
         // Save To DB
         if (Invite::create($inputs)) {
-            return redirect('/' . App::getLocale() . '/' . $inputs['link']);
+            return redirect('/' . $inputs['link'] . '/' . App::getLocale());
         }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($lang, $link)
+    public function show($link, $lang)
     {
         if (count(Invite::where('link', '=', $link)->get()) == 0) {
             return abort(404);
@@ -165,7 +165,7 @@ class InvitesController extends Controller
         }
 
         if ($link->save()) {
-            return redirect('/' . App::getLocale() . '/' . $link->link);
+            return redirect('/' . $link->link . '/' . App::getLocale());
         }
     }
 

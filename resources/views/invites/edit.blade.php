@@ -129,7 +129,7 @@
             </div>
 
             <button type="submit" class="fw-bold btn btn-primary w-100">{{ __('invite.n15') }}</button>
-            <a href="/{{ App::getLocale() }}/{{ $invite->link }}"
+            <a href="/{{ $invite->link }}/{{ App::getLocale() }}"
                 class="fw-bold btn btn-success w-100 mt-2 mb-3">{{ __('invite.n16') }}</a>
         </form>
     </div>

@@ -109,10 +109,10 @@
                         <a class="nav-link active fw-bold" aria-current="page" href="/{{ App::getLocale() }}">{{ __('inc.n1') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active fw-bold" href="/{{ App::getLocale() }}/about">{{ __('inc.n2') }}</a>
+                        <a class="nav-link active fw-bold" href="/about/{{ App::getLocale() }}">{{ __('inc.n2') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active fw-bold" href="/{{ App::getLocale() }}/contact">{{ __('inc.n3') }}</a>
+                        <a class="nav-link active fw-bold" href="/contact/{{ App::getLocale() }}">{{ __('inc.n3') }}</a>
                     </li>
                     <li class="nav-item">
                         @if (App::getLocale() == 'ar')

@@ -10,7 +10,7 @@
     <meta name="description" content="نقدم لك خدمة انشاء دعوات لمناسباتك مع امكانية مشاركة رابط الدعوة مع من تحب">
 
     <!-- Facebook Meta Tags -->
-    <meta property="og:url" content="https://inv.almiqias.com/ar/{{ $invite->link }}">
+    <meta property="og:url" content="https://inv.almiqias.com/{{ $invite->link }}/ar">
     <meta property="og:type" content="website">
     <meta property="og:title" content="{{ $invite->event }}">
     <meta property="og:description" content="{{ $invite->description }}">
@@ -20,7 +20,7 @@
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta property="twitter:domain" content="inv.almiqias.com">
-    <meta property="twitter:url" content="https://inv.almiqias.com/ar/{{ $invite->link }}">
+    <meta property="twitter:url" content="https://inv.almiqias.com/{{ $invite->link }}/ar">
     <meta name="twitter:title" content="{{ $invite->event }}">
     <meta name="twitter:description" content="{{ $invite->description }}">
     <meta name="twitter:image"
@@ -324,7 +324,7 @@
         <br>
 
         <div class="text-center dispr mb-3">
-            <a href="/{{ App::getLocale() }}/add"
+            <a href="/add/{{ App::getLocale() }}"
                 style="background: linear-gradient(90deg, rgba(250,44,99,1) 0%, rgba(251,167,15,1) 100%);"
                 class="btn fw-bold text-white p-3 mt-5">{{ __('home.h2') }}</a>
         </div>

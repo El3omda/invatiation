@@ -10,6 +10,18 @@
     </style>
 @endsection
 
+@php
+
+    $tz = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']))['geoplugin_timezone'];
+    // echo '<br>' . $tz . '<br>';
+    if ($tz == null) {
+        date_default_timezone_set('Asia/Riyadh');
+    } else {
+        date_default_timezone_set($tz);
+    }
+
+@endphp
+
 @section('content')
     <div class="container mt-5">
         <h1 class="text-center fw-bold">
@@ -80,7 +92,7 @@
                 {{-- Event Time --}}
                 <div class="col-6 mt-3">
                     <label for="inputTime" class="form-label fw-bold" style="">{{ __('invite.n10') }}</label>
-                    <input type="time" class="form-control" id="inputTime" name="time" value="{{ old('time') }}">
+                    <input type="time" class="form-control" id="inputTime" name="time" value="{{ date('H:i') }}">
                 </div>
 
                 {{-- Event Description --}}

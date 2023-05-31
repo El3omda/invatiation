@@ -13,7 +13,7 @@
                 {{ __('home.h1') }}
             </h3>
 
-            <a href="/{{ App::getLocale() }}/add"
+            <a href="/add/{{ App::getLocale() }}"
                 style="background: linear-gradient(90deg, rgba(250,44,99,1) 0%, rgba(251,167,15,1) 100%);"
                 class="btn fw-bold text-white p-3 mt-5 mb-3">{{ __('home.h2') }}</a>
 

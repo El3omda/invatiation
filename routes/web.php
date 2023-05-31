@@ -20,8 +20,21 @@ Route::get('/fix', function () {
 });
 
 Route::redirect('/', '/ar');
-Route::post('/mail', [PagesController::class, 'sendEmail'])->name('sendEmail');
 
+# Show Invite
+Route::get('/{link}/{lang}', [InvitesController::class, 'show'])->name('invShow');
+
+// About Page
+Route::get('/about/{lang}', [PagesController::class, 'about'])->name('aboutPage');
+
+// Contact Page
+Route::get('/contact/{lang}', [PagesController::class, 'contact'])->name('contact');
+
+# Create Invite
+Route::get('/add/{lang}', [InvitesController::class, 'create']);
+
+# Edit Invite
+Route::get('/invite/{link}/edit/{lang}', [InvitesController::class, 'edit'])->name('invEdit');
 
 Route::group(['prefix' => '{lang}'], function () {
 
@@ -30,31 +43,17 @@ Route::group(['prefix' => '{lang}'], function () {
         return view('pages.index');
     });
 
-    // About Page
-    Route::get('/about', [PagesController::class, 'about'])->name('aboutPage');
-
-    // Contact Page
-    Route::get('/contact', [PagesController::class, 'contact'])->name('contact');
 
     //-----> Invites <-----//
 
     # Delete Invite Owner Photo
     Route::get('/photo/{link}/delete', [InvitesController::class, 'destroyPhoto'])->name('destroyPhoto');
 
-    # Create Invite
-    Route::get('/add', [InvitesController::class, 'create']);
-
     # Store Invite
     Route::post('/invite/store', [InvitesController::class, 'store'])->name('invStore');
 
     # Edit Invite
-    Route::get('/invite/{link}/edit', [InvitesController::class, 'edit'])->name('invEdit');
-
-    # Edit Invite
     Route::put('/invite/{link}/update', [InvitesController::class, 'update'])->name('invUpdate');
-
-    # Show Invite
-    Route::get('/{link}', [InvitesController::class, 'show'])->name('invShow');
 
     # Show Invite
     Route::delete('/inv/{link}/delete', [InvitesController::class, 'destroy'])->name('invDelete');
