@@ -69,7 +69,7 @@ class InvitesController extends Controller
         }
 
         // User IP
-        $inputs['ip'] = $_SERVER['REMOTE_ADDR'];
+        $inputs['ip'] = request()->ip();
 
         // Generate Random Link
         function randomLink($length = 5)
