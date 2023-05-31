@@ -194,7 +194,7 @@
                     {{-- <sup><sup><i class="fa-sharp fa-solid fa-quote-left" style="color: rgba(250,44,99,1);"></i></sup></sup> --}}
                     en
                 @else
-                    <sup><sup><i class="fa-sharp fa-solid fa-quote-right" style="color: rgba(250,44,99,1);"></i></sup></sup>
+                    <sup><sup><i class="fa-solid fa-quote-right fa-flip-horizontal" style="color: rgba(250,44,99,1);"></i></sup></sup>
                 @endif
 
                 {{ $invite->description }}
@@ -203,13 +203,7 @@
                     {{-- <sup><sup><i class="fa-sharp fa-solid fa-quote-left" style="color: rgba(250,44,99,1);"></i></sup></sup> --}}
                     en
                 @else
-                    <sub><sub><i class="fa-sharp fa-solid fa-quote-left" style="color: rgba(250,44,99,1);"></i></sub></sub>
-                @endif
-
-                @if (preg_match('/[^A-Za-z0-9]/', $invite->description))
-                    English
-                @else
-                    Arabic
+                    <sub><sub><i class="fa-sharp fa-solid fa-quote-right" style="color: rgba(250,44,99,1);"></i></sub></sub>
                 @endif
             </h4>
 
