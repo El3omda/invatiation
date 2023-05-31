@@ -183,9 +183,10 @@
             <br>
 
             {{-- Invitation Description --}}
-            <h4 class="fw-bold
-            @if (preg_match('/[^A-Za-z0-9]/', $invite->description))
-                dir
+            <h4 class="fw-bold dir" style="
+            @if (!preg_match('/[^A-Za-z0-9]/', $invite->description))
+            @else
+            direction: rtl !important;
             @endif
             ">
 
