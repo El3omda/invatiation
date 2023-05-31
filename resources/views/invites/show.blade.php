@@ -191,8 +191,7 @@
             ">
 
                 @if (!preg_match('/[^A-Za-z0-9]/', $invite->description))
-                    {{-- <sup><sup><i class="fa-sharp fa-solid fa-quote-left" style="color: rgba(250,44,99,1);"></i></sup></sup> --}}
-                    english
+                    <sup><sup><i class="fa-sharp fa-solid fa-quote-left" style="color: rgba(250,44,99,1);"></i></sup></sup>
                 @else
                     <sup><sup><i class="fa-sharp fa-solid fa-quote-right" style="color: rgba(250,44,99,1);"></i></sup></sup>
                 @endif
@@ -200,7 +199,7 @@
                 {{ $invite->description }}
 
                 @if (!preg_match('/[^A-Za-z]/', $invite->description))
-                    <sup><sup><i class="fa-sharp fa-solid fa-quote-right" style="color: rgba(250,44,99,1);"></i></sup></sup>
+                    <sub><sub><i class="fa-sharp fa-solid fa-quote-right" style="color: rgba(250,44,99,1);"></i></sub></sub>
                 @else
                     <sub><sub><i class="fa-solid fa-quote-right fa-flip-horizontal"
                                 style="color: rgba(250,44,99,1);"></i></sub></sub>
