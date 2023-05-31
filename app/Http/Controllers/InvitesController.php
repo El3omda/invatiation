@@ -108,7 +108,7 @@ class InvitesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($lang, Invite $link)
+    public function edit(Invite $link, $lang)
     {
         if ($link->ip != $_SERVER['REMOTE_ADDR']) {
             return redirect('/?error');
