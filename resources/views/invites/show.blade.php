@@ -204,24 +204,7 @@
                 <h4 class="fw-bold">
                     يوم
                     <span style="color: rgba(250,44,99,1);">
-                        @php
-                            $day = date('l', $timeS);
-                            if ($day == 'Saturday') {
-                                echo 'السبت';
-                            } elseif ($day == 'Sunday') {
-                                echo 'الأحد';
-                            } elseif ($day == 'Monday') {
-                                echo 'الإثنين';
-                            } elseif ($day == 'Tuesday') {
-                                echo 'الثلاثاء';
-                            } elseif ($day == 'Wednesday') {
-                                echo 'الأربعاء';
-                            } elseif ($day == 'Thursday') {
-                                echo 'الخميس';
-                            } elseif ($day == 'Friday') {
-                                echo 'الجمعة';
-                            }
-                        @endphp
+                        {{ $day }}
                     </span>
                     الموافق
                     <span style="color: rgba(250,44,99,1);">{{ $invite->date }}</span>

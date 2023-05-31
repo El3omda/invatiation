@@ -9,6 +9,8 @@ use Dompdf\Options;
 use ArPHP\I18N\Arabic;
 use DateTime;
 use Illuminate\Support\Facades\App;
+use Hijrian;
+use Carbon\Carbon;
 
 class InvitesController extends Controller
 {
@@ -94,14 +96,32 @@ class InvitesController extends Controller
      */
     public function show($link, $lang)
     {
+
         if (count(Invite::where('link', '=', $link)->get()) == 0) {
             return abort(404);
         }
 
         $invite = Invite::where('link', '=', $link)->get()[0];
 
+        #Check Date Type
+        if ($invite->dateType == 'Miladi') {
+            $d = DateTime::createFromFormat('Y-m-d H:i', $invite->date . ' ' . $invite->time);
+            $timeS = $d->getTimestamp();
+        } else {
+            $date = Hijrian::gregory($invite->date)->format('Y-m-d');
+
+            $newDate = date('Y-m-d', strtotime($date));
+
+            $d = DateTime::createFromFormat('Y-m-d H:i', $newDate . ' ' . $invite->time);
+            $timeS = $d->getTimestamp();
+        }
+
+        $dd = Hijrian::gregory($invite->date)->translatedFormat('l');
+
+
         return view('invites.show', [
             'invite' => $invite,
+            'day' => $dd
         ]);
     }
 
@@ -203,11 +223,6 @@ class InvitesController extends Controller
     public function createPDF($lang, Invite $link)
     {
 
-        function HijriToJD($m, $d, $y)
-        {
-            return (int) ((11 * $y + 3) / 30) + 354 * $y + 30 * $m - (int) (($m - 1) / 2) + $d + 1948440 - 385;
-        }
-
         $options = new Options();
         $options->set('isRemoteEnabled', true);
         $dompdf = new Dompdf($options);
@@ -225,34 +240,16 @@ class InvitesController extends Controller
             $d = DateTime::createFromFormat('Y-m-d H:i', $link->date . ' ' . $link->time);
             $timeS = $d->getTimestamp();
         } else {
-            $exploadeDate = explode('-', $link->date);
+            $date = Hijrian::gregory($link->date)->format('Y-m-d');
 
-            $date = HijriToJD($exploadeDate[1], $exploadeDate[2], $exploadeDate[0]);
-
-            $originalDate = jdtogregorian($date);
-            $newDate = date('Y-m-d', strtotime($originalDate));
+            $newDate = date('Y-m-d', strtotime($date));
 
             $d = DateTime::createFromFormat('Y-m-d H:i', $newDate . ' ' . $link->time);
             $timeS = $d->getTimestamp();
         }
 
-        $day = date('l', $timeS);
+        $dd = Hijrian::gregory($link->date)->translatedFormat('l');
 
-        if ($day == 'Saturday') {
-            $dd = 'السبت';
-        } elseif ($day == 'Sunday') {
-            $dd = 'الأحد';
-        } elseif ($day == 'Monday') {
-            $dd = 'الإثنين';
-        } elseif ($day == 'Tuesday') {
-            $dd = 'الثلاثاء';
-        } elseif ($day == 'Wednesday') {
-            $dd = 'الأربعاء';
-        } elseif ($day == 'Thursday') {
-            $dd = 'الخميس';
-        } elseif ($day == 'Friday') {
-            $dd = 'الجمعة';
-        }
 
         $ddd = $Arabic->utf8Glyphs($dd);
         $str3 = $Arabic->utf8Glyphs('الموافق');
@@ -302,10 +299,9 @@ class InvitesController extends Controller
         } else {
             $exploadeDate = explode('-', $link->date);
 
-            $date = HijriToJD($exploadeDate[1], $exploadeDate[2], $exploadeDate[0]);
+            $date = \GeniusTS\HijriDate\Hijri::convertToGregorian($exploadeDate['2'], $exploadeDate['1'], $exploadeDate['0']);
 
-            $originalDate = jdtogregorian($date);
-            $newDate = date('Y-m-d', strtotime($originalDate));
+            $newDate = date('Y-m-d', strtotime($date));
 
             $d = DateTime::createFromFormat('Y-m-d H:i', $newDate . ' ' . $link->time);
             $timeS = $d->getTimestamp();

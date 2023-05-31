@@ -10,10 +10,6 @@
         * {
             font-family: DejaVu Sans, sans-serif;
         }
-
-        .en {
-            font-family: 'english', sans-serif;
-        }
     </style>
 </head>
 
