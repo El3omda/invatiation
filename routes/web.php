@@ -21,9 +21,6 @@ Route::get('/fix', function () {
 
 Route::redirect('/', '/ar');
 
-# Show Invite
-Route::get('/{link}/{lang}', [InvitesController::class, 'show'])->name('invShow');
-
 // About Page
 Route::get('/about/{lang}', [PagesController::class, 'about'])->name('aboutPage');
 
@@ -35,6 +32,9 @@ Route::get('/add/{lang}', [InvitesController::class, 'create']);
 
 # Edit Invite
 Route::get('/invite/{link}/edit/{lang}', [InvitesController::class, 'edit'])->name('invEdit');
+
+# Show Invite
+Route::get('/{link}/{lang}', [InvitesController::class, 'show'])->name('invShow');
 
 Route::group(['prefix' => '{lang}'], function () {
 
