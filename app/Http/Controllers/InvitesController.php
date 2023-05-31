@@ -133,9 +133,6 @@ class InvitesController extends Controller
      */
     public function edit(Invite $link, $lang)
     {
-        if ($link->ip != $_SERVER['REMOTE_ADDR']) {
-            return redirect('/?error');
-        }
         return view('invites.edit', [
             'invite' => $link
         ]);
