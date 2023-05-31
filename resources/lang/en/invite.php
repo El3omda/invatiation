@@ -36,7 +36,7 @@ return [
     's12' => 'LinkedIn',
     's13' => 'Telegram',
     's14' => 'Download Invitation',
-    's15' => 'Remaining On This Occasion',
+    's15' => 'Remaining For This Occasion',
     's16' => 'You have been Invited By',
     's17' => 'To',
 ];
