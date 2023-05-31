@@ -183,28 +183,12 @@
             <br>
 
             {{-- Invitation Description --}}
-            <h4 class="fw-bold dir" style="
-            @if (!preg_match('/[^A-Za-z0-9]/', $invite->description))
-            @else
-            direction: rtl !important;
-            @endif
-            ">
+            <h4 class="fw-bold dir">
 
-                @if (!preg_match('/[^A-Za-z0-9]/', $invite->description))
-                    {{-- <sup><sup><i class="fa-sharp fa-solid fa-quote-left" style="color: rgba(250,44,99,1);"></i></sup></sup> --}}
-                    en
-                @else
-                    <sup><sup><i class="fa-solid fa-quote-right fa-flip-horizontal" style="color: rgba(250,44,99,1);"></i></sup></sup>
-                @endif
-
+                <i class="fa-solid fa-ditto" style="color: rgba(250,44,99,1);"></i>
                 {{ $invite->description }}
+                <i class="fa-solid fa-ditto" style="color: rgba(250,44,99,1);"></i>
 
-                @if (!preg_match('/[^A-Za-z]/', $invite->description))
-                    {{-- <sup><sup><i class="fa-sharp fa-solid fa-quote-left" style="color: rgba(250,44,99,1);"></i></sup></sup> --}}
-                    en
-                @else
-                    <sub><sub><i class="fa-sharp fa-solid fa-quote-right" style="color: rgba(250,44,99,1);"></i></sub></sub>
-                @endif
             </h4>
 
             <br>
