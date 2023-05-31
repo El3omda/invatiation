@@ -96,7 +96,7 @@
 
         <br>
 
-        <a href="https://inv.almiqias.com/ar">inv.almiqias.com</a>
+        <a href="https://inv.almiqias.com/{{ $invite->link }}/{{ App::getLocale() }}">inv.almiqias.com</a>
 
     </center>
 
