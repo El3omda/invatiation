@@ -183,7 +183,11 @@
             <br>
 
             {{-- Invitation Description --}}
-            <h4 class="fw-bold dir">
+            <h4 class="fw-bold
+            @if (preg_match('/[^A-Za-z0-9]/', $invite->description))
+                dir
+            @endif
+            ">
 
                 @if (!preg_match('/[^A-Za-z0-9]/', $invite->description))
                     {{-- <sup><sup><i class="fa-sharp fa-solid fa-quote-left" style="color: rgba(250,44,99,1);"></i></sup></sup> --}}
