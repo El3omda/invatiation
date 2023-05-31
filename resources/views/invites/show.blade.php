@@ -145,7 +145,7 @@
         @if ($invite->ip == $_SERVER['REMOTE_ADDR'])
             <div class="d-flex justify-content-between my-5 dispr">
                 <div>
-                    <a href="/invite/{{ $invite->id }}/edit/{{ App::getLocale() }}" class="btn btn-primary">
+                    <a href="{{ route('invEdit', [$invite->id, App::getLocale()]) }}" class="btn btn-primary">
                         <i class="fas fa-edit"></i>
                     </a>
                 </div>
