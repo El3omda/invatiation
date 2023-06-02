@@ -16,13 +16,13 @@
 
 @php
 
-    $tz = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']))['geoplugin_timezone'];
+    // $tz = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']))['geoplugin_timezone'];
     // echo '<br>' . $tz . '<br>';
-    if ($tz == null) {
+    // if ($tz == null) {
         date_default_timezone_set('Asia/Riyadh');
-    } else {
-        date_default_timezone_set($tz);
-    }
+    // } else {
+        // date_default_timezone_set($tz);
+    // }
 
 @endphp
 
@@ -225,7 +225,8 @@
             $("#hijri-date-input").hijriDatePicker({
                 hijri: true,
                 useCurrent: true,
-                showSwitcher: false
+                showSwitcher: false,
+                locale: '{{ App::getLocale() == "ar" ? "ar-SA": "en-us" }}'
             });
         });
     </script>

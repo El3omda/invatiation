@@ -519,7 +519,7 @@
                  * GLOBAL VARS
                  * -------------------------- */
                 // The date you want to count down to
-                var targetDate = new Date("{{ $newDate }} {{ $invite->time }}");
+                var targetDate = new Date("{{ $hijriDate }} {{ $invite->time }}");
                 targetDate.setHours(targetDate.getHours() - 1);
                 // Other date related variables
                 var days;
