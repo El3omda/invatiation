@@ -36,6 +36,11 @@ class InvitesController extends Controller
     public function store(Request $request)
     {
 
+        $inputs = $request->validate([
+            'dateHijri' => 'required_if:dateT,Hijri',
+            'dateMiladi' => 'required_if:dateT,Miladi',
+        ]);
+
         $inputs = [
             'owner' => $request->owner,
             'event' => $request->event,

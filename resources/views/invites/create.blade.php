@@ -15,11 +15,10 @@
     // $tz = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']))['geoplugin_timezone'];
     // echo '<br>' . $tz . '<br>';
     // if ($tz == null) {
-        date_default_timezone_set('Asia/Riyadh');
+    date_default_timezone_set('Asia/Riyadh');
     // } else {
-        // date_default_timezone_set($tz);
+    // date_default_timezone_set($tz);
     // }
-
 @endphp
 
 @section('content')
@@ -28,7 +27,8 @@
             {{ __('invite.n1') }}
         </h1>
 
-        <form action="{{ route('invStore', App::getLocale()) }}" method="POST" style="direction: rtl" enctype="multipart/form-data">
+        <form action="{{ route('invStore', App::getLocale()) }}" method="POST" style="direction: rtl"
+            enctype="multipart/form-data">
             @csrf
             @method('POST')
             <div class="row mt-5">
@@ -54,18 +54,36 @@
 
                 <hr class="mt-5">
 
+                <p class="text-danger fw-bold text-center">
+                    @error('dateMiladi')
+                        @if (App::getLocale() == 'ar')
+                            يلزم أدخال تاريخ
+                        @else
+                            Please Enter A Valid Date
+                        @endif
+                    @enderror
+                    @error('dateHijri')
+                        @if (App::getLocale() == 'ar')
+                            يلزم أدخال تاريخ
+                        @else
+                            Please Enter A Valid Date
+                        @endif
+                    @enderror
+                </p>
+
                 {{-- Date Type --}}
                 <div class="col-12 mt-3">
                     <label for="inputAddress" class="form-label fw-bold" style="">{{ __('invite.n5') }}</label>
                     <div class="d-flex justify-content-between">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="dateT" id="Hijri">
+                            <input class="form-check-input" type="radio" name="dateT" value="Hijri" id="Hijri">
                             <label class="form-check-label" for="Hijri" id="HijriText">
                                 {{ __('invite.n6') }}
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="dateT" id="Miladi" checked>
+                            <input class="form-check-input" type="radio" name="dateT" value="Miladi" id="Miladi"
+                                checked>
                             <label class="form-check-label" for="Miladi" id="MiladiText">
                                 {{ __('invite.n7') }}
                             </label>
@@ -98,8 +116,9 @@
                 {{-- Event Description --}}
                 <div class="col-12 mt-3">
                     <label for="description" class="form-label fw-bold" style="">{{ __('invite.n11') }}</label>
-                    <textarea id="description" style="resize: none;" rows="5" name="description" maxlength='250' onkeyup="handle()"
-                        class="form-control shadow-none py-2 fw-bold" placeholder="" aria-label="{{ __('invite.n11') }}">{{ old('description') }}</textarea>
+                    <textarea id="description" style="resize: none;" rows="5" name="description" maxlength='250'
+                        onkeyup="handle()" class="form-control shadow-none py-2 fw-bold" placeholder=""
+                        aria-label="{{ __('invite.n11') }}">{{ old('description') }}</textarea>
                     <p class="fw-bold" id='remaining'></p>
                 </div>
 
@@ -192,7 +211,7 @@
                 hijri: true,
                 useCurrent: true,
                 showSwitcher: false,
-                locale: '{{ App::getLocale() == "ar" ? "ar-SA": "en-us" }}'
+                locale: '{{ App::getLocale() == 'ar' ? 'ar-SA' : 'en-us' }}'
             });
         });
     </script>
