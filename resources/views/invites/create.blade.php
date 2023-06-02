@@ -78,7 +78,7 @@
                 {{-- Miladi --}}
                 <div class="col-6 mt-3" style="display: none;" id="MiladiBox">
                     <label for="inputDate" class="form-label fw-bold" style="">{{ __('invite.n9') }}</label>
-                    <input type="date" class="form-control" id="inputDate" value="{{ old('dateMiladi') }}" required
+                    <input type="date" class="form-control" id="inputDate" value="{{ old('dateMiladi') }}"
                         name="dateMiladi">
                 </div>
 
@@ -156,6 +156,18 @@
         } else {
             $('#MiladiBox').slideUp();
         }
+
+
+        $('#Hijri').click(function() {
+            $('#MiladiBox').slideUp();
+            $('#HijriBox').slideDown();
+        });
+        $('#Miladi').click(function() {
+            $('#HijriBox').slideUp();
+            $('#MiladiBox').slideDown();
+        });
+
+
         $('#HijriText').click(function() {
             $('#MiladiBox').slideUp();
             $('#HijriBox').slideDown();
