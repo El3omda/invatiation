@@ -96,14 +96,14 @@
                 {{-- Miladi --}}
                 <div class="col-6 mt-3" style="display: none;" id="MiladiBox">
                     <label for="inputDate" class="form-label fw-bold" style="">{{ __('invite.n9') }}</label>
-                    <input type="date" class="form-control" id="inputDate" value="{{ old('dateMiladi') }}"
+                    <input type="date" class="form-control dateMiladi" id="inputDate" value="{{ old('dateMiladi') }}"
                         name="dateMiladi">
                 </div>
 
                 {{-- Hijiri --}}
                 <div class="col-6 mt-3" style="display: none;" id="HijriBox">
                     <label for="inputAddress" class="form-label fw-bold" style="">{{ __('invite.n8') }}</label>
-                    <input type='text' class="form-control" id="hijri-date-input" value="{{ old('dateHijri') }}"
+                    <input type='text' class="form-control dateHijri" id="hijri-date-input" value="{{ old('dateHijri') }}"
                         name="dateHijri" />
                 </div>
 
@@ -180,20 +180,24 @@
         $('#Hijri').click(function() {
             $('#MiladiBox').slideUp();
             $('#HijriBox').slideDown();
+            $('.dateMiladi').val('');
         });
         $('#Miladi').click(function() {
             $('#HijriBox').slideUp();
             $('#MiladiBox').slideDown();
+            $('.dateHijri').val('');
         });
 
 
         $('#HijriText').click(function() {
             $('#MiladiBox').slideUp();
             $('#HijriBox').slideDown();
+            $('.dateMiladi').val('');
         });
         $('#MiladiText').click(function() {
             $('#HijriBox').slideUp();
             $('#MiladiBox').slideDown();
+            $('.dateHijri').val('');
         });
 
         // Textarea Max Length
