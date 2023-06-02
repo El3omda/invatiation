@@ -124,17 +124,22 @@ class InvitesController extends Controller
         if ($invite->dateType == 'Hijri') {
             $dd = Hijrian::gregory($invite->date)->translatedFormat('l');
 
-            $hijriDate =  Hijrian::gregory($invite->date);
+            $hijriDate =  Hijrian::gregory($invite->date)->format('Y-m-d');
             // dd($hijriDate);
+
+            return view('invites.show', [
+                'invite' => $invite,
+                'day' => $dd,
+                'hijriDate' => $hijriDate
+            ]);
         } else {
             $dd = Carbon::createFromFormat('Y-m-d', $invite->date)->translatedFormat('l');
+            return view('invites.show', [
+                'invite' => $invite,
+                'day' => $dd
+            ]);
         }
 
-        return view('invites.show', [
-            'invite' => $invite,
-            'day' => $dd,
-            'hijriDate' => $hijriDate
-        ]);
     }
 
     /**
