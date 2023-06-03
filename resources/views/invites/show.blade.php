@@ -128,7 +128,7 @@
             $date = HijriToJD($exploadeDate[1], $exploadeDate[2], $exploadeDate[0]);
 
             $originalDate = jdtogregorian($date);
-            $newDate = date('Y-m-d', strtotime($originalDate));
+            $newDate = date('Y-m-d', strtotime($hijriDate));
 
             $d = DateTime::createFromFormat('Y-m-d H:i', $newDate . ' ' . $invite->time);
             $timeS = $d->getTimestamp();
